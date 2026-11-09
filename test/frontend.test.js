@@ -149,3 +149,11 @@ test('new stage clears a stale target, while a same-stage refresh preserves a pe
  view.room.game.stepKey='SHERIFF:1:VOTE:2';view.self.action={step:'SHERIFF',choice:{seat:null}};
  run(`applyState(${JSON.stringify(view)})`);assert.equal(run('actionSeat'),null);
 });
+
+ test('host volume test is visible without an initial enable switch; players have no audio controls',()=>{
+  const {run}=boot();
+  run('data='+JSON.stringify({joined:true,room:{code:'123456',status:'LOBBY',players},self:{isHost:true}}));
+  const html=run('voicePanel()');assert.match(html,/data-action="voice-test"[^>]*>测试音量/);
+  assert.match(html,/默认开启/);assert.doesNotMatch(html,/data-action="voice-enable"/);
+  run('data.self.isHost=false');assert.doesNotMatch(run('voicePanel()'),/voice-test/);
+ });

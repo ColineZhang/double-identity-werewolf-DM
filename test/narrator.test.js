@@ -81,3 +81,11 @@ test('public result queue reads ballots and sorted deaths, excludes private resu
  r.game.phase='FINISHED';r.game.winner='WOLF';r.status='FINISHED';narrator.sync(r);
  assert.ok(r.narration.plan.some(c=>c.cue==='D08.WOLF'));
 });
+
+ test('automatic host attachment preserves a paused clock and its cue plan',()=>{
+  const r=enabled();narrator.control(r,client,'pause',100100);
+  const before=JSON.stringify(r.narration.plan),origin=r.narration.origin,pausedAt=r.narration.pausedAt;
+  narrator.control(r,client,'attach',100200);
+  assert.equal(r.narration.paused,true);assert.equal(r.narration.origin,origin);
+  assert.equal(r.narration.pausedAt,pausedAt);assert.equal(JSON.stringify(r.narration.plan),before);
+ });

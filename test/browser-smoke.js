@@ -81,12 +81,19 @@ async function main(){
   const {sessionId}=await send('Target.attachToTarget',{targetId,flatten:true});
   await send('Runtime.enable',{},sessionId);await send('Page.enable',{},sessionId);
   if(mobile)await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true},sessionId);
-  const sid=actor==='host'?room.host.sid:room.players[actor].sid;
-  await send('Network.setCookie',{name:'werewolf_sid',value:sid,url:base,httpOnly:true,sameSite:'Strict'},sessionId);
+  if(room){const sid=actor==='host'?room.host.sid:room.players[actor].sid;
+  await send('Network.setCookie',{name:'werewolf_sid',value:sid,url:base,httpOnly:true,sameSite:'Strict'},sessionId);}
   await send('Page.navigate',{url:base},sessionId);
-  await waitFor(sessionId,'typeof data!=="undefined" && data?.joined===true');
+  await waitFor(sessionId,room?'typeof data!=="undefined" && data?.joined===true':'typeof data!=="undefined" && data!==null');
   return sessionId;
  }
+ const fresh=await page(null);
+ await evaluate(fresh,'document.querySelector("[data-action=create]").click()');
+ await waitFor(fresh,'data?.joined && voice.status().active',12000);
+ assert.equal(await evaluate(fresh,'!!document.querySelector("[data-action=voice-enable]")'),false);
+ await evaluate(fresh,'document.querySelector("[data-action=voice-test]").click()');
+ await waitFor(fresh,'voice.status().preview && voice.status().playing');
+ assert.equal(await evaluate(fresh,'document.querySelector("[data-action=voice-test]").textContent'),'测试音量');
  const player=await page(seer,0,true),host=await page(seer,'host'),other=await page(seer,1);
  assert.equal(await evaluate(player,'Array.from(document.querySelector("#targetSelect").options).find(o=>o.value==="3").textContent.includes("玩家 3")'),true);
  assert.equal(await evaluate(player,'document.querySelector("[data-action=submit]").disabled'),true);
@@ -119,12 +126,14 @@ async function main(){
  assert.equal(await evaluate(candidate,'data.self.election.canWithdraw'),false);
  const electionScreenshot=await send('Page.captureScreenshot',{format:'png'},candidate);
  fs.writeFileSync(path.join(dir,'election-mobile.png'),Buffer.from(electionScreenshot.data,'base64'));
- await waitFor(candidate,'data.room.game.phase==="DISCUSSION"',14000);
+ await waitFor(candidate,'data.room.game.phase==="DISCUSSION"',35000);
  await waitFor(ehost,'data.room.game.phase==="DISCUSSION"');
  assert.equal(await evaluate(candidate,'data.room.game.sheriff'),2);
  await waitFor(candidate,'data.room.game.phase==="DISCUSSION"');
- await evaluate(ehost,'document.querySelector("[data-action=voice-enable]").click()');
- await waitFor(ehost,'voice.status().active && voice.status().playing',12000);
+ await evaluate(ehost,'document.querySelector("[data-action=voice-test]").click()');
+ await waitFor(ehost,'voice.status().preview');
+ await evaluate(ehost,'document.querySelector("[data-action=voice-resume]").click()');
+ await waitFor(ehost,'voice.status().active && voice.status().playing && !voice.status().preview && !data.room.narration.paused',12000);
  assert.equal(await evaluate(candidate,'voice.status().active'),false);
  await evaluate(ehost,'document.querySelector("[data-action=voice-pause]").click()');
  await waitFor(ehost,'data.room.narration.paused && !voice.status().playing');
@@ -158,15 +167,23 @@ async function main(){
  assert.equal(await evaluate(farewellPhone,'data.room.game.phase'), 'LAST_WORDS');
  assert.equal(await evaluate(farewellPhone,'!!document.querySelector("[data-deadline]")'),false);
  assert.equal(await evaluate(farewellPhone,'fetch("/api/advance",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"}).then(r=>r.status)'),403);
+ await waitFor(farewellHost,'voice.status().active');
  await send('Page.reload',{},farewellHost);await waitFor(farewellHost,'typeof data!=="undefined" && data?.room?.game?.phase==="LAST_WORDS"');
  assert.equal(await evaluate(farewellHost,'document.querySelector("[data-action=advance]").textContent'),'结束遗言，进入黑夜');
+ await waitFor(farewellHost,'data.room.narration.paused && !voice.status().loading');
+ // A refreshed document must wait for the previous playback lease to expire.
+ if(!await evaluate(farewellHost,'voice.status().active'))await delay(16000);
+ await evaluate(farewellHost,'document.querySelector("[data-action=voice-test]").click()');
+ await waitFor(farewellHost,'voice.status().preview && data.room.narration.paused');
+ await evaluate(farewellHost,'document.querySelector("[data-action=voice-resume]").click()');
+ await waitFor(farewellHost,'!data.room.narration.paused && !voice.status().preview');
  await evaluate(farewellHost,'document.querySelector("[data-action=advance]").click()');
  await waitFor(farewellPhone,'data.room.game.phase==="NIGHT"');
  assert.equal(await evaluate(farewellPhone,'data.room.game.night'),2);
  const discussionHost=await page(discussion,'host'),discussionPhone=await page(discussion,0,true);
  const initialOrder=await evaluate(discussionPhone,'data.room.game.speaking');
  assert.equal(await evaluate(discussionPhone,'document.body.textContent.includes("根据随机点数")'),true);
- await evaluate(discussionHost,'document.querySelector("[data-action=voice-enable]").click()');
+ await evaluate(discussionHost,'document.querySelector("[data-action=voice-test]").click()');
  await waitFor(discussionHost,'data.room.narration.plan?.some(c=>c.cue.startsWith("speaking."))');
  await send('Page.reload',{},discussionPhone);await waitFor(discussionPhone,'typeof data!=="undefined" && !!data?.room?.game?.speaking');
  assert.deepEqual(await evaluate(discussionPhone,'data.room.game.speaking'),initialOrder);
@@ -179,7 +196,7 @@ async function main(){
   assert.equal(await evaluate(endPage,'document.documentElement.scrollWidth <= innerWidth'),true);
  }
  assert.deepEqual(errors,[]);
- console.log(JSON.stringify({ok:true,checks:['seer click -> private result','result survives host skip and reload','host and other player privacy','mobile signup -> speech -> withdrawal','10-second countdown -> sheriff result -> automatic dawn announcement','host WAV playback -> pause -> replay -> resume -> disable; player stays silent','mobile identity drawer open/close/reload','second witch sees knife -> saves self -> host skip dawn -> survives'],screenshots:[path.join(dir,'seer-mobile.png'),path.join(dir,'election-mobile.png')]}));
+ console.log(JSON.stringify({ok:true,checks:['fresh room defaults to voice hosting; volume test plays without enable switch','host reload stays paused; volume test reconnects; manual resume continues','seer click -> private result','result survives host skip and reload','host and other player privacy','mobile signup -> speech -> withdrawal','10-second countdown -> sheriff result -> automatic dawn announcement','host WAV playback -> pause -> replay -> resume -> disable; player stays silent','mobile identity drawer open/close/reload','second witch sees knife -> saves self -> host skip dawn -> survives'],screenshots:[path.join(dir,'seer-mobile.png'),path.join(dir,'election-mobile.png')]}));
  await send('Browser.close').catch(()=>{});
 }
 main().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{

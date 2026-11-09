@@ -6,7 +6,7 @@ let clockOffset=0,refreshSerial=0,appliedRefresh=0;
 const params=new URLSearchParams(location.search),form={name:'',code:params.get('room')||''};
 let lastRender='';
 let identityOpen=false;
-const voice=globalThis.WerewolfVoice?.create({request:body=>api('/api/narration',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),refresh:()=>refresh(true),onChange:()=>{if(data)render(true);}});
+const voice=globalThis.WerewolfVoice?.create({autoStart:true,request:body=>api('/api/narration',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),refresh:()=>refresh(true),onChange:()=>{if(data)render(true);}});
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const tag=(txt,cls='')=>`<span class="badge ${cls}">${esc(txt)}</span>`;
 async function api(path,options={}){let r;try{r=await fetch(path,{credentials:'same-origin',cache:'no-store',...options});}catch{throw Error('无法连接服务器，请检查电脑是否仍在运行，以及手机是否在同一个 Wi-Fi。');}let j;try{j=await r.json();}catch{throw Error('服务器返回了无效响应');}if(!r.ok)throw Error(j.error||`HTTP ${r.status}`);return j;}
@@ -53,7 +53,7 @@ function voicePanel(){
   let text=n.paused?'主持已暂停，请等待房主恢复。':data.room.game?.phase==='NIGHT'?(n.windowOpen?'当前行动窗口已开放，请在手机上确认操作。':'正在播报，请保持安静并等待行动窗口。'):'由房主电脑播放公共语音。';
   return `<section class="tipstrip space-md">${text}${n.actionClosesAt&&n.windowOpen?countdown(n.actionClosesAt):''}</section>`;
  }
- return `<section class="panel voice-panel space-xl"><div class="between"><h2 class="section-title">法官语音</h2>${tag(n.paused?'已暂停':v.active?'本机播报':'未启用')}</div><p class="sm subtle">2023 六人播报稿 v0.2 · 离线中文语音。开启后夜间按固定时间自动推进；只由这台电脑发声。</p>${v.active?`<div class="host-actions"><button class="button small" data-action="voice-${n.paused?'resume':'pause'}">${n.paused?'恢复整场':'暂停整场'}</button><button class="button secondary small" data-action="voice-replay">重播当前口令并保持暂停</button><button class="button secondary small" data-action="voice-test">试听</button><button class="button ghost small" data-action="voice-disable">关闭语音</button></div>`:`<button class="button" data-action="voice-enable" ${v.loading?'disabled':''}>${v.loading?'正在准备语音…':'开启语音并自动主持夜间'}</button>`}${v.message?`<p class="voice-message">${esc(v.message)}</p>`:''}${n.paused?`<p class="sm">${esc(n.reason||'请恢复主持后继续游戏')}</p>`:''}${v.caption?`<div class="tipstrip space-md voice-caption">${esc(v.caption)}</div>`:''}${n.enabled&&data.room.game?.phase==='NIGHT'?`<p class="sm subtle">首夜不设潜行者窗口；第二夜起完整播报所有角色，死亡或没药不缩短等待。</p>${n.windowOpen?countdown(n.actionClosesAt):''}`:''}</section>`;
+ return `<section class="panel voice-panel space-xl"><div class="between"><h2 class="section-title">法官语音</h2>${tag(n.paused?'已暂停':v.active?'本机播报':'默认开启')}</div><p class="sm subtle">2023 六人播报稿 v0.2 · 离线中文语音。语音和夜间自动主持默认开启；只由这台电脑发声。</p>${v.active?`<div class="host-actions"><button class="button small" data-action="voice-${n.paused?'resume':'pause'}">${n.paused?'恢复整场':'暂停整场'}</button><button class="button secondary small" data-action="voice-replay">重播当前口令并保持暂停</button><button class="button ghost small" data-action="voice-disable">关闭语音</button></div>`:`<p class="sm subtle">${v.loading?'正在准备语音…':'点击测试音量可检查声音并恢复播放连接。'}</p>`}<button class="button secondary small" data-action="voice-test" ${v.loading?'disabled':''}>测试音量</button>${v.message?`<p class="voice-message">${esc(v.message)}</p>`:''}${n.paused?`<p class="sm">${esc(n.reason||'请恢复主持后继续游戏')}</p>`:''}${v.caption?`<div class="tipstrip space-md voice-caption">${esc(v.caption)}</div>`:''}${n.enabled&&data.room.game?.phase==='NIGHT'?`<p class="sm subtle">首夜不设潜行者窗口；第二夜起完整播报所有角色，死亡或没药不缩短等待。</p>${n.windowOpen?countdown(n.actionClosesAt):''}`:''}</section>`;
 }
 function speakingView(s){return s?`<div class="tipstrip space-md">随机点数：${s.point} / ${s.sides}<br>${esc(s.message)}<br>发言顺序：${s.order.map(n=>n+'号').join(' → ')}</div>`:'';}
 function electionView(){
@@ -159,11 +159,11 @@ if(x==='skip')return post('/api/skip',{mode:btn.dataset.mode,gameId:data.room.ga
 if(x.startsWith('voice-')){const action=x.slice(6);if(action==='enable')await voice?.enable();else if(action==='test')await voice?.test();else if(action==='replay')await voice?.replay();else await voice?.control(action);return;}
 if(x==='copy'){try{await navigator.clipboard.writeText(btn.dataset.value);btn.textContent='已复制';}catch{const el=document.createElement('textarea');el.value=btn.dataset.value;document.body.append(el);el.select();document.execCommand('copy');el.remove();btn.textContent='已复制';}return;}
 if(x==='select-card'){selectedTop=btn.dataset.card;render(true);return;}
-if(x==='create')return post('/api/create');
+if(x==='create'){voice?.prepare();return post('/api/create');}
 if(x==='remove'){if(confirm('移出这位玩家？'))post('/api/remove',{playerId:btn.dataset.id});return;}
 if(x==='start')return post('/api/start');
 if(x==='lock')return post('/api/lock',{topCardId:availableTop()});
-if(x==='begin')return post('/api/begin');
+if(x==='begin'){if(voice&&!await voice.enable('attach'))return;return post('/api/begin');}
 if(x==='signup')return submitChoice({type:'SIGNUP',run:btn.dataset.run==='true'});
 if(x==='withdraw'){if(confirm('退水后不能重新上警，也不能投警长票。确认退水？'))return submitChoice({type:'WITHDRAW'});return;}
 if(x==='explode'){if(confirm('确认发动自爆？竞选日自爆会吞警徽，其他情况按当前规则进入黑夜。'))return submitChoice({type:'EXPLODE'});return;}

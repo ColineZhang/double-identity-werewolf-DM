@@ -145,7 +145,7 @@ const handler=async(req,res)=>{
         if(!narrator.owns(room,clientId))fail(409,'播放端已失效，请重新开启语音');
         const lease=narrator.claim(room,clientId);save();return send(res,200,{ok:true,lease});
       }
-      if(action==='enable')narrator.claim(room,clientId);
+      if(action==='enable'||action==='attach')narrator.claim(room,clientId);
       narrator.control(room,clientId,action);publish(room);
       return send(res,200,{ok:true,...(action!=='disable'?{lease:narrator.claim(room,clientId)}:{})});
     }catch(e){fail(e.status||409,e.message);}
