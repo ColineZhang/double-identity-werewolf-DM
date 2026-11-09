@@ -1,0 +1,1921 @@
+{
+    "id":  "narrator-2023-6p-v02",
+    "playbackRate":  1.5,
+    "label":  "2023 六人播报稿 v0.2",
+    "source":  "NARRATOR_SCRIPT_2023_6P_v0.2.md",
+    "voice":  "Microsoft Huihui Desktop",
+    "windows":  {
+                    "GUARD":  10000,
+                    "WOLF":  40000,
+                    "WITCH":  30000,
+                    "SEER":  10000,
+                    "STALKER":  10000
+                },
+    "cues":  {
+                 "test":  {
+                              "text":  "语音测试。请确认音量合适。",
+                              "file":  "test.wav",
+                              "durationMs":  4786
+                          },
+                 "N00":  {
+                             "text":  "天黑请闭眼。请所有玩家保持安静。轮到你的身份行动时，在手机上操作。",
+                             "file":  "N00.wav",
+                             "durationMs":  10967
+                         },
+                 "GUARD.open":  {
+                                    "text":  "守卫请睁眼。请选择今晚要守护的玩家。请在手机上确认目标。",
+                                    "file":  "GUARD.open.wav",
+                                    "durationMs":  9477
+                                },
+                 "GUARD.close":  {
+                                     "text":  "守卫请闭眼。",
+                                     "file":  "GUARD.close.wav",
+                                     "durationMs":  2307
+                                 },
+                 "WOLF.open":  {
+                                   "text":  "狼人请睁眼。请确认当前的狼队成员。请在手机上决定今晚的行动，并在时间结束前确认。",
+                                   "file":  "WOLF.open.wav",
+                                   "durationMs":  12792
+                               },
+                 "WOLF.close":  {
+                                    "text":  "狼人请闭眼。",
+                                    "file":  "WOLF.close.wav",
+                                    "durationMs":  2382
+                                },
+                 "WITCH.open":  {
+                                    "text":  "女巫请睁眼。今晚的指杀信息，请查看手机。你有一瓶解药，要使用吗？你有一瓶毒药，要使用吗？请在手机上确认你的选择。",
+                                    "file":  "WITCH.open.wav",
+                                    "durationMs":  18170
+                                },
+                 "WITCH.close":  {
+                                     "text":  "女巫请闭眼。",
+                                     "file":  "WITCH.close.wav",
+                                     "durationMs":  2222
+                                 },
+                 "SEER.open":  {
+                                   "text":  "预言家请睁眼。请选择今晚要查验的玩家。查验结果请查看手机。请确认你已查看结果。",
+                                   "file":  "SEER.open.wav",
+                                   "durationMs":  13056
+                               },
+                 "SEER.close":  {
+                                    "text":  "预言家请闭眼。",
+                                    "file":  "SEER.close.wav",
+                                    "durationMs":  2494
+                                },
+                 "STALKER.open":  {
+                                      "text":  "潜行者请睁眼。请查看今晚是否可以发动潜行。如需使用技能，请在手机上选择并确认目标。",
+                                      "file":  "STALKER.open.wav",
+                                      "durationMs":  13305
+                                  },
+                 "STALKER.close":  {
+                                       "text":  "潜行者请闭眼。",
+                                       "file":  "STALKER.close.wav",
+                                       "durationMs":  2617
+                                   },
+                 "N06.settle":  {
+                                    "text":  "所有夜间行动结束。请保持安静，等待天亮。",
+                                    "file":  "N06.settle.wav",
+                                    "durationMs":  6875
+                                },
+                 "N06.dawn":  {
+                                  "text":  "天亮了，请各位玩家睁眼。",
+                                  "file":  "N06.dawn.wav",
+                                  "durationMs":  3917
+                              },
+                 "A.order":  {
+                                 "text":  "请各位玩家在手机上确认自己的两张身份牌，并选择第一身份和第二身份。身份顺序确认后，将不能更改。请所有玩家完成确认。",
+                                 "file":  "A.order.wav",
+                                 "durationMs":  17255
+                             },
+                 "A.begin":  {
+                                 "text":  "身份确认完毕。游戏开始。",
+                                 "file":  "A.begin.wav",
+                                 "durationMs":  4616
+                             },
+                 "D00.signup":  {
+                                    "text":  "现在进行警长竞选。想要参选的玩家，请在手机上报名。",
+                                    "file":  "D00.signup.wav",
+                                    "durationMs":  8469
+                                },
+                 "D00.speeches":  {
+                                      "text":  "报名结束。请候选人发言。",
+                                      "file":  "D00.speeches.wav",
+                                      "durationMs":  4609
+                                  },
+                 "D00.vote":  {
+                                  "text":  "现在开始投票。请在手机上选择你支持的候选人，也可以弃票。",
+                                  "file":  "D00.vote.wav",
+                                  "durationMs":  8928
+                              },
+                 "D00.count":  {
+                                   "text":  "投票结束。现在公布票型。",
+                                   "file":  "D00.count.wav",
+                                   "durationMs":  4678
+                               },
+                 "D00.tie":  {
+                                 "text":  "本轮竞选平票，本局没有警长。",
+                                 "file":  "D00.tie.wav",
+                                 "durationMs":  4643
+                             },
+                 "D00.none":  {
+                                  "text":  "警长竞选结束，本局没有警长。",
+                                  "file":  "D00.none.wav",
+                                  "durationMs":  4602
+                              },
+                 "D01":  {
+                             "text":  "公布昨夜出局情况。昨夜平安夜。",
+                             "file":  "D01.wav",
+                             "durationMs":  5184
+                         },
+                 "D04":  {
+                             "text":  "现在进入白天讨论。请各位玩家按屏幕显示的顺序发言。",
+                             "file":  "D04.wav",
+                             "durationMs":  7929
+                         },
+                 "D05.vote":  {
+                                  "text":  "发言结束。现在开始放逐投票。请在手机上选择放逐目标，也可以弃票。",
+                                  "file":  "D05.vote.wav",
+                                  "durationMs":  10839
+                              },
+                 "D05.count":  {
+                                   "text":  "投票结束。现在公布票型。",
+                                   "file":  "D05.count.wav",
+                                   "durationMs":  4678
+                               },
+                 "D05.none":  {
+                                  "text":  "本轮平票，无玩家因本次投票出局。",
+                                  "file":  "D05.none.wav",
+                                  "durationMs":  5187
+                              },
+                 "D05.abstain":  {
+                                     "text":  "本轮全员弃票，无人被放逐。",
+                                     "file":  "D05.abstain.wav",
+                                     "durationMs":  4550
+                                 },
+                 "D06":  {
+                             "text":  "警长已出局。请在手机上选择是否移交警徽。",
+                             "file":  "D06.wav",
+                             "durationMs":  7015
+                         },
+                 "D06.none":  {
+                                  "text":  "警徽作废。本局接下来没有警长。",
+                                  "file":  "D06.none.wav",
+                                  "durationMs":  5212
+                              },
+                 "D06B.end":  {
+                                  "text":  "遗言结束。",
+                                  "file":  "D06B.end.wav",
+                                  "durationMs":  1943
+                              },
+                 "D06C.end":  {
+                                  "text":  "当前白天阶段结束。",
+                                  "file":  "D06C.end.wav",
+                                  "durationMs":  3039
+                              },
+                 "D07":  {
+                             "text":  "白天阶段结束。",
+                             "file":  "D07.wav",
+                             "durationMs":  2515
+                         },
+                 "D08.VILLAGE":  {
+                                     "text":  "游戏结束。好人阵营获胜。",
+                                     "file":  "D08.VILLAGE.wav",
+                                     "durationMs":  4509
+                                 },
+                 "D08.WOLF":  {
+                                  "text":  "游戏结束。狼人阵营获胜。",
+                                  "file":  "D08.WOLF.wav",
+                                  "durationMs":  4487
+                              },
+                 "withdraw":  {
+                                  "text":  "现在进入退水与自爆倒计时。",
+                                  "file":  "withdraw.wav",
+                                  "durationMs":  4019
+                              },
+                 "speaking.1.CW":  {
+                                       "text":  "根据随机点数，从一号玩家开始顺时针发言。",
+                                       "file":  "speaking.1.CW.wav",
+                                       "durationMs":  6239
+                                   },
+                 "speaking.1.CCW":  {
+                                        "text":  "根据随机点数，从一号玩家开始逆时针发言。",
+                                        "file":  "speaking.1.CCW.wav",
+                                        "durationMs":  6190
+                                    },
+                 "speaking.2.CW":  {
+                                       "text":  "根据随机点数，从二号玩家开始顺时针发言。",
+                                       "file":  "speaking.2.CW.wav",
+                                       "durationMs":  6288
+                                   },
+                 "speaking.2.CCW":  {
+                                        "text":  "根据随机点数，从二号玩家开始逆时针发言。",
+                                        "file":  "speaking.2.CCW.wav",
+                                        "durationMs":  6246
+                                    },
+                 "speaking.3.CW":  {
+                                       "text":  "根据随机点数，从三号玩家开始顺时针发言。",
+                                       "file":  "speaking.3.CW.wav",
+                                       "durationMs":  6329
+                                   },
+                 "speaking.3.CCW":  {
+                                        "text":  "根据随机点数，从三号玩家开始逆时针发言。",
+                                        "file":  "speaking.3.CCW.wav",
+                                        "durationMs":  6282
+                                    },
+                 "speaking.4.CW":  {
+                                       "text":  "根据随机点数，从四号玩家开始顺时针发言。",
+                                       "file":  "speaking.4.CW.wav",
+                                       "durationMs":  6301
+                                   },
+                 "speaking.4.CCW":  {
+                                        "text":  "根据随机点数，从四号玩家开始逆时针发言。",
+                                        "file":  "speaking.4.CCW.wav",
+                                        "durationMs":  6257
+                                    },
+                 "speaking.5.CW":  {
+                                       "text":  "根据随机点数，从五号玩家开始顺时针发言。",
+                                       "file":  "speaking.5.CW.wav",
+                                       "durationMs":  6262
+                                   },
+                 "speaking.5.CCW":  {
+                                        "text":  "根据随机点数，从五号玩家开始逆时针发言。",
+                                        "file":  "speaking.5.CCW.wav",
+                                        "durationMs":  6215
+                                    },
+                 "speaking.6.CW":  {
+                                       "text":  "根据随机点数，从六号玩家开始顺时针发言。",
+                                       "file":  "speaking.6.CW.wav",
+                                       "durationMs":  6276
+                                   },
+                 "speaking.6.CCW":  {
+                                        "text":  "根据随机点数，从六号玩家开始逆时针发言。",
+                                        "file":  "speaking.6.CCW.wav",
+                                        "durationMs":  6229
+                                    },
+                 "speaker.1":  {
+                                   "text":  "请一号玩家发言。",
+                                   "file":  "speaker.1.wav",
+                                   "durationMs":  2808
+                               },
+                 "withdrew.1":  {
+                                    "text":  "一号玩家选择退水。",
+                                    "file":  "withdrew.1.wav",
+                                    "durationMs":  3127
+                                },
+                 "elected.1":  {
+                                   "text":  "一号玩家当选警长。",
+                                   "file":  "elected.1.wav",
+                                   "durationMs":  3045
+                               },
+                 "exploded.1":  {
+                                    "text":  "一号玩家发动自爆。",
+                                    "file":  "exploded.1.wav",
+                                    "durationMs":  2895
+                                },
+                 "eliminated.1":  {
+                                      "text":  "一号玩家完全出局。",
+                                      "file":  "eliminated.1.wav",
+                                      "durationMs":  3106
+                                  },
+                 "exiled.1":  {
+                                  "text":  "一号玩家获得最高票，本轮放逐结算完成。",
+                                  "file":  "exiled.1.wav",
+                                  "durationMs":  5868
+                              },
+                 "tie.exiled.1":  {
+                                      "text":  "本轮出现平票。根据警长带队规则，本轮放逐结算目标为一号玩家。",
+                                      "file":  "tie.exiled.1.wav",
+                                      "durationMs":  9327
+                                  },
+                 "transfer.1":  {
+                                    "text":  "警徽移交给一号玩家。",
+                                    "file":  "transfer.1.wav",
+                                    "durationMs":  3182
+                                },
+                 "lastwords.1":  {
+                                     "text":  "一号玩家，请发表遗言。",
+                                     "file":  "lastwords.1.wav",
+                                     "durationMs":  3738
+                                 },
+                 "ballot.1.0":  {
+                                    "text":  "一号弃票。",
+                                    "file":  "ballot.1.0.wav",
+                                    "durationMs":  2004
+                                },
+                 "ballot.1.1":  {
+                                    "text":  "一号投给一号。",
+                                    "file":  "ballot.1.1.wav",
+                                    "durationMs":  2461
+                                },
+                 "ballot.1.2":  {
+                                    "text":  "一号投给二号。",
+                                    "file":  "ballot.1.2.wav",
+                                    "durationMs":  2491
+                                },
+                 "ballot.1.3":  {
+                                    "text":  "一号投给三号。",
+                                    "file":  "ballot.1.3.wav",
+                                    "durationMs":  2546
+                                },
+                 "ballot.1.4":  {
+                                    "text":  "一号投给四号。",
+                                    "file":  "ballot.1.4.wav",
+                                    "durationMs":  2514
+                                },
+                 "ballot.1.5":  {
+                                    "text":  "一号投给五号。",
+                                    "file":  "ballot.1.5.wav",
+                                    "durationMs":  2459
+                                },
+                 "ballot.1.6":  {
+                                    "text":  "一号投给六号。",
+                                    "file":  "ballot.1.6.wav",
+                                    "durationMs":  2502
+                                },
+                 "speaker.2":  {
+                                   "text":  "请二号玩家发言。",
+                                   "file":  "speaker.2.wav",
+                                   "durationMs":  2847
+                               },
+                 "withdrew.2":  {
+                                    "text":  "二号玩家选择退水。",
+                                    "file":  "withdrew.2.wav",
+                                    "durationMs":  3140
+                                },
+                 "elected.2":  {
+                                   "text":  "二号玩家当选警长。",
+                                   "file":  "elected.2.wav",
+                                   "durationMs":  3059
+                               },
+                 "exploded.2":  {
+                                    "text":  "二号玩家发动自爆。",
+                                    "file":  "exploded.2.wav",
+                                    "durationMs":  2915
+                                },
+                 "eliminated.2":  {
+                                      "text":  "二号玩家完全出局。",
+                                      "file":  "eliminated.2.wav",
+                                      "durationMs":  3113
+                                  },
+                 "exiled.2":  {
+                                  "text":  "二号玩家获得最高票，本轮放逐结算完成。",
+                                  "file":  "exiled.2.wav",
+                                  "durationMs":  5885
+                              },
+                 "tie.exiled.2":  {
+                                      "text":  "本轮出现平票。根据警长带队规则，本轮放逐结算目标为二号玩家。",
+                                      "file":  "tie.exiled.2.wav",
+                                      "durationMs":  9451
+                                  },
+                 "transfer.2":  {
+                                    "text":  "警徽移交给二号玩家。",
+                                    "file":  "transfer.2.wav",
+                                    "durationMs":  3311
+                                },
+                 "lastwords.2":  {
+                                     "text":  "二号玩家，请发表遗言。",
+                                     "file":  "lastwords.2.wav",
+                                     "durationMs":  3757
+                                 },
+                 "ballot.2.0":  {
+                                    "text":  "二号弃票。",
+                                    "file":  "ballot.2.0.wav",
+                                    "durationMs":  2012
+                                },
+                 "ballot.2.1":  {
+                                    "text":  "二号投给一号。",
+                                    "file":  "ballot.2.1.wav",
+                                    "durationMs":  2492
+                                },
+                 "ballot.2.2":  {
+                                    "text":  "二号投给二号。",
+                                    "file":  "ballot.2.2.wav",
+                                    "durationMs":  2516
+                                },
+                 "ballot.2.3":  {
+                                    "text":  "二号投给三号。",
+                                    "file":  "ballot.2.3.wav",
+                                    "durationMs":  2576
+                                },
+                 "ballot.2.4":  {
+                                    "text":  "二号投给四号。",
+                                    "file":  "ballot.2.4.wav",
+                                    "durationMs":  2559
+                                },
+                 "ballot.2.5":  {
+                                    "text":  "二号投给五号。",
+                                    "file":  "ballot.2.5.wav",
+                                    "durationMs":  2491
+                                },
+                 "ballot.2.6":  {
+                                    "text":  "二号投给六号。",
+                                    "file":  "ballot.2.6.wav",
+                                    "durationMs":  2532
+                                },
+                 "speaker.3":  {
+                                   "text":  "请三号玩家发言。",
+                                   "file":  "speaker.3.wav",
+                                   "durationMs":  2893
+                               },
+                 "withdrew.3":  {
+                                    "text":  "三号玩家选择退水。",
+                                    "file":  "withdrew.3.wav",
+                                    "durationMs":  3212
+                                },
+                 "elected.3":  {
+                                   "text":  "三号玩家当选警长。",
+                                   "file":  "elected.3.wav",
+                                   "durationMs":  3131
+                               },
+                 "exploded.3":  {
+                                    "text":  "三号玩家发动自爆。",
+                                    "file":  "exploded.3.wav",
+                                    "durationMs":  2986
+                                },
+                 "eliminated.3":  {
+                                      "text":  "三号玩家完全出局。",
+                                      "file":  "eliminated.3.wav",
+                                      "durationMs":  3182
+                                  },
+                 "exiled.3":  {
+                                  "text":  "三号玩家获得最高票，本轮放逐结算完成。",
+                                  "file":  "exiled.3.wav",
+                                  "durationMs":  5959
+                              },
+                 "tie.exiled.3":  {
+                                      "text":  "本轮出现平票。根据警长带队规则，本轮放逐结算目标为三号玩家。",
+                                      "file":  "tie.exiled.3.wav",
+                                      "durationMs":  9485
+                                  },
+                 "transfer.3":  {
+                                    "text":  "警徽移交给三号玩家。",
+                                    "file":  "transfer.3.wav",
+                                    "durationMs":  3360
+                                },
+                 "lastwords.3":  {
+                                     "text":  "三号玩家，请发表遗言。",
+                                     "file":  "lastwords.3.wav",
+                                     "durationMs":  3831
+                                 },
+                 "ballot.3.0":  {
+                                    "text":  "三号弃票。",
+                                    "file":  "ballot.3.0.wav",
+                                    "durationMs":  2090
+                                },
+                 "ballot.3.1":  {
+                                    "text":  "三号投给一号。",
+                                    "file":  "ballot.3.1.wav",
+                                    "durationMs":  2552
+                                },
+                 "ballot.3.2":  {
+                                    "text":  "三号投给二号。",
+                                    "file":  "ballot.3.2.wav",
+                                    "durationMs":  2576
+                                },
+                 "ballot.3.3":  {
+                                    "text":  "三号投给三号。",
+                                    "file":  "ballot.3.3.wav",
+                                    "durationMs":  2641
+                                },
+                 "ballot.3.4":  {
+                                    "text":  "三号投给四号。",
+                                    "file":  "ballot.3.4.wav",
+                                    "durationMs":  2613
+                                },
+                 "ballot.3.5":  {
+                                    "text":  "三号投给五号。",
+                                    "file":  "ballot.3.5.wav",
+                                    "durationMs":  2560
+                                },
+                 "ballot.3.6":  {
+                                    "text":  "三号投给六号。",
+                                    "file":  "ballot.3.6.wav",
+                                    "durationMs":  2597
+                                },
+                 "speaker.4":  {
+                                   "text":  "请四号玩家发言。",
+                                   "file":  "speaker.4.wav",
+                                   "durationMs":  2861
+                               },
+                 "withdrew.4":  {
+                                    "text":  "四号玩家选择退水。",
+                                    "file":  "withdrew.4.wav",
+                                    "durationMs":  3163
+                                },
+                 "elected.4":  {
+                                   "text":  "四号玩家当选警长。",
+                                   "file":  "elected.4.wav",
+                                   "durationMs":  3084
+                               },
+                 "exploded.4":  {
+                                    "text":  "四号玩家发动自爆。",
+                                    "file":  "exploded.4.wav",
+                                    "durationMs":  2945
+                                },
+                 "eliminated.4":  {
+                                      "text":  "四号玩家完全出局。",
+                                      "file":  "eliminated.4.wav",
+                                      "durationMs":  3145
+                                  },
+                 "exiled.4":  {
+                                  "text":  "四号玩家获得最高票，本轮放逐结算完成。",
+                                  "file":  "exiled.4.wav",
+                                  "durationMs":  5913
+                              },
+                 "tie.exiled.4":  {
+                                      "text":  "本轮出现平票。根据警长带队规则，本轮放逐结算目标为四号玩家。",
+                                      "file":  "tie.exiled.4.wav",
+                                      "durationMs":  9450
+                                  },
+                 "transfer.4":  {
+                                    "text":  "警徽移交给四号玩家。",
+                                    "file":  "transfer.4.wav",
+                                    "durationMs":  3240
+                                },
+                 "lastwords.4":  {
+                                     "text":  "四号玩家，请发表遗言。",
+                                     "file":  "lastwords.4.wav",
+                                     "durationMs":  3792
+                                 },
+                 "ballot.4.0":  {
+                                    "text":  "四号弃票。",
+                                    "file":  "ballot.4.0.wav",
+                                    "durationMs":  2044
+                                },
+                 "ballot.4.1":  {
+                                    "text":  "四号投给一号。",
+                                    "file":  "ballot.4.1.wav",
+                                    "durationMs":  2508
+                                },
+                 "ballot.4.2":  {
+                                    "text":  "四号投给二号。",
+                                    "file":  "ballot.4.2.wav",
+                                    "durationMs":  2534
+                                },
+                 "ballot.4.3":  {
+                                    "text":  "四号投给三号。",
+                                    "file":  "ballot.4.3.wav",
+                                    "durationMs":  2603
+                                },
+                 "ballot.4.4":  {
+                                    "text":  "四号投给四号。",
+                                    "file":  "ballot.4.4.wav",
+                                    "durationMs":  2573
+                                },
+                 "ballot.4.5":  {
+                                    "text":  "四号投给五号。",
+                                    "file":  "ballot.4.5.wav",
+                                    "durationMs":  2521
+                                },
+                 "ballot.4.6":  {
+                                    "text":  "四号投给六号。",
+                                    "file":  "ballot.4.6.wav",
+                                    "durationMs":  2557
+                                },
+                 "speaker.5":  {
+                                   "text":  "请五号玩家发言。",
+                                   "file":  "speaker.5.wav",
+                                   "durationMs":  2805
+                               },
+                 "withdrew.5":  {
+                                    "text":  "五号玩家选择退水。",
+                                    "file":  "withdrew.5.wav",
+                                    "durationMs":  3093
+                                },
+                 "elected.5":  {
+                                   "text":  "五号玩家当选警长。",
+                                   "file":  "elected.5.wav",
+                                   "durationMs":  3020
+                               },
+                 "exploded.5":  {
+                                    "text":  "五号玩家发动自爆。",
+                                    "file":  "exploded.5.wav",
+                                    "durationMs":  2882
+                                },
+                 "eliminated.5":  {
+                                      "text":  "五号玩家完全出局。",
+                                      "file":  "eliminated.5.wav",
+                                      "durationMs":  3078
+                                  },
+                 "exiled.5":  {
+                                  "text":  "五号玩家获得最高票，本轮放逐结算完成。",
+                                  "file":  "exiled.5.wav",
+                                  "durationMs":  5849
+                              },
+                 "tie.exiled.5":  {
+                                      "text":  "本轮出现平票。根据警长带队规则，本轮放逐结算目标为五号玩家。",
+                                      "file":  "tie.exiled.5.wav",
+                                      "durationMs":  9424
+                                  },
+                 "transfer.5":  {
+                                    "text":  "警徽移交给五号玩家。",
+                                    "file":  "transfer.5.wav",
+                                    "durationMs":  3168
+                                },
+                 "lastwords.5":  {
+                                     "text":  "五号玩家，请发表遗言。",
+                                     "file":  "lastwords.5.wav",
+                                     "durationMs":  3718
+                                 },
+                 "ballot.5.0":  {
+                                    "text":  "五号弃票。",
+                                    "file":  "ballot.5.0.wav",
+                                    "durationMs":  1987
+                                },
+                 "ballot.5.1":  {
+                                    "text":  "五号投给一号。",
+                                    "file":  "ballot.5.1.wav",
+                                    "durationMs":  2463
+                                },
+                 "ballot.5.2":  {
+                                    "text":  "五号投给二号。",
+                                    "file":  "ballot.5.2.wav",
+                                    "durationMs":  2480
+                                },
+                 "ballot.5.3":  {
+                                    "text":  "五号投给三号。",
+                                    "file":  "ballot.5.3.wav",
+                                    "durationMs":  2541
+                                },
+                 "ballot.5.4":  {
+                                    "text":  "五号投给四号。",
+                                    "file":  "ballot.5.4.wav",
+                                    "durationMs":  2516
+                                },
+                 "ballot.5.5":  {
+                                    "text":  "五号投给五号。",
+                                    "file":  "ballot.5.5.wav",
+                                    "durationMs":  2462
+                                },
+                 "ballot.5.6":  {
+                                    "text":  "五号投给六号。",
+                                    "file":  "ballot.5.6.wav",
+                                    "durationMs":  2495
+                                },
+                 "speaker.6":  {
+                                   "text":  "请六号玩家发言。",
+                                   "file":  "speaker.6.wav",
+                                   "durationMs":  2846
+                               },
+                 "withdrew.6":  {
+                                    "text":  "六号玩家选择退水。",
+                                    "file":  "withdrew.6.wav",
+                                    "durationMs":  3156
+                                },
+                 "elected.6":  {
+                                   "text":  "六号玩家当选警长。",
+                                   "file":  "elected.6.wav",
+                                   "durationMs":  3083
+                               },
+                 "exploded.6":  {
+                                    "text":  "六号玩家发动自爆。",
+                                    "file":  "exploded.6.wav",
+                                    "durationMs":  2934
+                                },
+                 "eliminated.6":  {
+                                      "text":  "六号玩家完全出局。",
+                                      "file":  "eliminated.6.wav",
+                                      "durationMs":  3140
+                                  },
+                 "exiled.6":  {
+                                  "text":  "六号玩家获得最高票，本轮放逐结算完成。",
+                                  "file":  "exiled.6.wav",
+                                  "durationMs":  5908
+                              },
+                 "tie.exiled.6":  {
+                                      "text":  "本轮出现平票。根据警长带队规则，本轮放逐结算目标为六号玩家。",
+                                      "file":  "tie.exiled.6.wav",
+                                      "durationMs":  9430
+                                  },
+                 "transfer.6":  {
+                                    "text":  "警徽移交给六号玩家。",
+                                    "file":  "transfer.6.wav",
+                                    "durationMs":  3293
+                                },
+                 "lastwords.6":  {
+                                     "text":  "六号玩家，请发表遗言。",
+                                     "file":  "lastwords.6.wav",
+                                     "durationMs":  3776
+                                 },
+                 "ballot.6.0":  {
+                                    "text":  "六号弃票。",
+                                    "file":  "ballot.6.0.wav",
+                                    "durationMs":  2033
+                                },
+                 "ballot.6.1":  {
+                                    "text":  "六号投给一号。",
+                                    "file":  "ballot.6.1.wav",
+                                    "durationMs":  2518
+                                },
+                 "ballot.6.2":  {
+                                    "text":  "六号投给二号。",
+                                    "file":  "ballot.6.2.wav",
+                                    "durationMs":  2536
+                                },
+                 "ballot.6.3":  {
+                                    "text":  "六号投给三号。",
+                                    "file":  "ballot.6.3.wav",
+                                    "durationMs":  2604
+                                },
+                 "ballot.6.4":  {
+                                    "text":  "六号投给四号。",
+                                    "file":  "ballot.6.4.wav",
+                                    "durationMs":  2576
+                                },
+                 "ballot.6.5":  {
+                                    "text":  "六号投给五号。",
+                                    "file":  "ballot.6.5.wav",
+                                    "durationMs":  2515
+                                },
+                 "ballot.6.6":  {
+                                    "text":  "六号投给六号。",
+                                    "file":  "ballot.6.6.wav",
+                                    "durationMs":  2555
+                                },
+                 "deaths.1":  {
+                                  "text":  "公布昨夜出局情况。一号玩家出局。",
+                                  "file":  "deaths.1.wav",
+                                  "durationMs":  5475
+                              },
+                 "deaths.2":  {
+                                  "text":  "公布昨夜出局情况。二号玩家出局。",
+                                  "file":  "deaths.2.wav",
+                                  "durationMs":  5512
+                              },
+                 "deaths.1-2":  {
+                                    "text":  "公布昨夜出局情况。一号、二号玩家出局。",
+                                    "file":  "deaths.1-2.wav",
+                                    "durationMs":  6500
+                                },
+                 "deaths.3":  {
+                                  "text":  "公布昨夜出局情况。三号玩家出局。",
+                                  "file":  "deaths.3.wav",
+                                  "durationMs":  5580
+                              },
+                 "deaths.1-3":  {
+                                    "text":  "公布昨夜出局情况。一号、三号玩家出局。",
+                                    "file":  "deaths.1-3.wav",
+                                    "durationMs":  6574
+                                },
+                 "deaths.2-3":  {
+                                    "text":  "公布昨夜出局情况。二号、三号玩家出局。",
+                                    "file":  "deaths.2-3.wav",
+                                    "durationMs":  6613
+                                },
+                 "deaths.1-2-3":  {
+                                      "text":  "公布昨夜出局情况。一号、二号、三号玩家出局。",
+                                      "file":  "deaths.1-2-3.wav",
+                                      "durationMs":  7616
+                                  },
+                 "deaths.4":  {
+                                  "text":  "公布昨夜出局情况。四号玩家出局。",
+                                  "file":  "deaths.4.wav",
+                                  "durationMs":  5533
+                              },
+                 "deaths.1-4":  {
+                                    "text":  "公布昨夜出局情况。一号、四号玩家出局。",
+                                    "file":  "deaths.1-4.wav",
+                                    "durationMs":  6542
+                                },
+                 "deaths.2-4":  {
+                                    "text":  "公布昨夜出局情况。二号、四号玩家出局。",
+                                    "file":  "deaths.2-4.wav",
+                                    "durationMs":  6591
+                                },
+                 "deaths.1-2-4":  {
+                                      "text":  "公布昨夜出局情况。一号、二号、四号玩家出局。",
+                                      "file":  "deaths.1-2-4.wav",
+                                      "durationMs":  7581
+                                  },
+                 "deaths.3-4":  {
+                                    "text":  "公布昨夜出局情况。三号、四号玩家出局。",
+                                    "file":  "deaths.3-4.wav",
+                                    "durationMs":  6639
+                                },
+                 "deaths.1-3-4":  {
+                                      "text":  "公布昨夜出局情况。一号、三号、四号玩家出局。",
+                                      "file":  "deaths.1-3-4.wav",
+                                      "durationMs":  7654
+                                  },
+                 "deaths.2-3-4":  {
+                                      "text":  "公布昨夜出局情况。二号、三号、四号玩家出局。",
+                                      "file":  "deaths.2-3-4.wav",
+                                      "durationMs":  7683
+                                  },
+                 "deaths.1-2-3-4":  {
+                                        "text":  "公布昨夜出局情况。一号、二号、三号、四号玩家出局。",
+                                        "file":  "deaths.1-2-3-4.wav",
+                                        "durationMs":  8675
+                                    },
+                 "deaths.5":  {
+                                  "text":  "公布昨夜出局情况。五号玩家出局。",
+                                  "file":  "deaths.5.wav",
+                                  "durationMs":  5477
+                              },
+                 "deaths.1-5":  {
+                                    "text":  "公布昨夜出局情况。一号、五号玩家出局。",
+                                    "file":  "deaths.1-5.wav",
+                                    "durationMs":  6499
+                                },
+                 "deaths.2-5":  {
+                                    "text":  "公布昨夜出局情况。二号、五号玩家出局。",
+                                    "file":  "deaths.2-5.wav",
+                                    "durationMs":  6538
+                                },
+                 "deaths.1-2-5":  {
+                                      "text":  "公布昨夜出局情况。一号、二号、五号玩家出局。",
+                                      "file":  "deaths.1-2-5.wav",
+                                      "durationMs":  7547
+                                  },
+                 "deaths.3-5":  {
+                                    "text":  "公布昨夜出局情况。三号、五号玩家出局。",
+                                    "file":  "deaths.3-5.wav",
+                                    "durationMs":  6602
+                                },
+                 "deaths.1-3-5":  {
+                                      "text":  "公布昨夜出局情况。一号、三号、五号玩家出局。",
+                                      "file":  "deaths.1-3-5.wav",
+                                      "durationMs":  7605
+                                  },
+                 "deaths.2-3-5":  {
+                                      "text":  "公布昨夜出局情况。二号、三号、五号玩家出局。",
+                                      "file":  "deaths.2-3-5.wav",
+                                      "durationMs":  7642
+                                  },
+                 "deaths.1-2-3-5":  {
+                                        "text":  "公布昨夜出局情况。一号、二号、三号、五号玩家出局。",
+                                        "file":  "deaths.1-2-3-5.wav",
+                                        "durationMs":  8629
+                                    },
+                 "deaths.4-5":  {
+                                    "text":  "公布昨夜出局情况。四号、五号玩家出局。",
+                                    "file":  "deaths.4-5.wav",
+                                    "durationMs":  6552
+                                },
+                 "deaths.1-4-5":  {
+                                      "text":  "公布昨夜出局情况。一号、四号、五号玩家出局。",
+                                      "file":  "deaths.1-4-5.wav",
+                                      "durationMs":  7565
+                                  },
+                 "deaths.2-4-5":  {
+                                      "text":  "公布昨夜出局情况。二号、四号、五号玩家出局。",
+                                      "file":  "deaths.2-4-5.wav",
+                                      "durationMs":  7606
+                                  },
+                 "deaths.1-2-4-5":  {
+                                        "text":  "公布昨夜出局情况。一号、二号、四号、五号玩家出局。",
+                                        "file":  "deaths.1-2-4-5.wav",
+                                        "durationMs":  8603
+                                    },
+                 "deaths.3-4-5":  {
+                                      "text":  "公布昨夜出局情况。三号、四号、五号玩家出局。",
+                                      "file":  "deaths.3-4-5.wav",
+                                      "durationMs":  7664
+                                  },
+                 "deaths.1-3-4-5":  {
+                                        "text":  "公布昨夜出局情况。一号、三号、四号、五号玩家出局。",
+                                        "file":  "deaths.1-3-4-5.wav",
+                                        "durationMs":  8658
+                                    },
+                 "deaths.2-3-4-5":  {
+                                        "text":  "公布昨夜出局情况。二号、三号、四号、五号玩家出局。",
+                                        "file":  "deaths.2-3-4-5.wav",
+                                        "durationMs":  8693
+                                    },
+                 "deaths.1-2-3-4-5":  {
+                                          "text":  "公布昨夜出局情况。一号、二号、三号、四号、五号玩家出局。",
+                                          "file":  "deaths.1-2-3-4-5.wav",
+                                          "durationMs":  9695
+                                      },
+                 "deaths.6":  {
+                                  "text":  "公布昨夜出局情况。六号玩家出局。",
+                                  "file":  "deaths.6.wav",
+                                  "durationMs":  5533
+                              },
+                 "deaths.1-6":  {
+                                    "text":  "公布昨夜出局情况。一号、六号玩家出局。",
+                                    "file":  "deaths.1-6.wav",
+                                    "durationMs":  6538
+                                },
+                 "deaths.2-6":  {
+                                    "text":  "公布昨夜出局情况。二号、六号玩家出局。",
+                                    "file":  "deaths.2-6.wav",
+                                    "durationMs":  6569
+                                },
+                 "deaths.1-2-6":  {
+                                      "text":  "公布昨夜出局情况。一号、二号、六号玩家出局。",
+                                      "file":  "deaths.1-2-6.wav",
+                                      "durationMs":  7576
+                                  },
+                 "deaths.3-6":  {
+                                    "text":  "公布昨夜出局情况。三号、六号玩家出局。",
+                                    "file":  "deaths.3-6.wav",
+                                    "durationMs":  6641
+                                },
+                 "deaths.1-3-6":  {
+                                      "text":  "公布昨夜出局情况。一号、三号、六号玩家出局。",
+                                      "file":  "deaths.1-3-6.wav",
+                                      "durationMs":  7639
+                                  },
+                 "deaths.2-3-6":  {
+                                      "text":  "公布昨夜出局情况。二号、三号、六号玩家出局。",
+                                      "file":  "deaths.2-3-6.wav",
+                                      "durationMs":  7682
+                                  },
+                 "deaths.1-2-3-6":  {
+                                        "text":  "公布昨夜出局情况。一号、二号、三号、六号玩家出局。",
+                                        "file":  "deaths.1-2-3-6.wav",
+                                        "durationMs":  8666
+                                    },
+                 "deaths.4-6":  {
+                                    "text":  "公布昨夜出局情况。四号、六号玩家出局。",
+                                    "file":  "deaths.4-6.wav",
+                                    "durationMs":  6603
+                                },
+                 "deaths.1-4-6":  {
+                                      "text":  "公布昨夜出局情况。一号、四号、六号玩家出局。",
+                                      "file":  "deaths.1-4-6.wav",
+                                      "durationMs":  7613
+                                  },
+                 "deaths.2-4-6":  {
+                                      "text":  "公布昨夜出局情况。二号、四号、六号玩家出局。",
+                                      "file":  "deaths.2-4-6.wav",
+                                      "durationMs":  7648
+                                  },
+                 "deaths.1-2-4-6":  {
+                                        "text":  "公布昨夜出局情况。一号、二号、四号、六号玩家出局。",
+                                        "file":  "deaths.1-2-4-6.wav",
+                                        "durationMs":  8636
+                                    },
+                 "deaths.3-4-6":  {
+                                      "text":  "公布昨夜出局情况。三号、四号、六号玩家出局。",
+                                      "file":  "deaths.3-4-6.wav",
+                                      "durationMs":  7703
+                                  },
+                 "deaths.1-3-4-6":  {
+                                        "text":  "公布昨夜出局情况。一号、三号、四号、六号玩家出局。",
+                                        "file":  "deaths.1-3-4-6.wav",
+                                        "durationMs":  8697
+                                    },
+                 "deaths.2-3-4-6":  {
+                                        "text":  "公布昨夜出局情况。二号、三号、四号、六号玩家出局。",
+                                        "file":  "deaths.2-3-4-6.wav",
+                                        "durationMs":  8728
+                                    },
+                 "deaths.1-2-3-4-6":  {
+                                          "text":  "公布昨夜出局情况。一号、二号、三号、四号、六号玩家出局。",
+                                          "file":  "deaths.1-2-3-4-6.wav",
+                                          "durationMs":  9731
+                                      },
+                 "deaths.5-6":  {
+                                    "text":  "公布昨夜出局情况。五号、六号玩家出局。",
+                                    "file":  "deaths.5-6.wav",
+                                    "durationMs":  6530
+                                },
+                 "deaths.1-5-6":  {
+                                      "text":  "公布昨夜出局情况。一号、五号、六号玩家出局。",
+                                      "file":  "deaths.1-5-6.wav",
+                                      "durationMs":  7554
+                                  },
+                 "deaths.2-5-6":  {
+                                      "text":  "公布昨夜出局情况。二号、五号、六号玩家出局。",
+                                      "file":  "deaths.2-5-6.wav",
+                                      "durationMs":  7581
+                                  },
+                 "deaths.1-2-5-6":  {
+                                        "text":  "公布昨夜出局情况。一号、二号、五号、六号玩家出局。",
+                                        "file":  "deaths.1-2-5-6.wav",
+                                        "durationMs":  8594
+                                    },
+                 "deaths.3-5-6":  {
+                                      "text":  "公布昨夜出局情况。三号、五号、六号玩家出局。",
+                                      "file":  "deaths.3-5-6.wav",
+                                      "durationMs":  7653
+                                  },
+                 "deaths.1-3-5-6":  {
+                                        "text":  "公布昨夜出局情况。一号、三号、五号、六号玩家出局。",
+                                        "file":  "deaths.1-3-5-6.wav",
+                                        "durationMs":  8649
+                                    },
+                 "deaths.2-3-5-6":  {
+                                        "text":  "公布昨夜出局情况。二号、三号、五号、六号玩家出局。",
+                                        "file":  "deaths.2-3-5-6.wav",
+                                        "durationMs":  8668
+                                    },
+                 "deaths.1-2-3-5-6":  {
+                                          "text":  "公布昨夜出局情况。一号、二号、三号、五号、六号玩家出局。",
+                                          "file":  "deaths.1-2-3-5-6.wav",
+                                          "durationMs":  9678
+                                      },
+                 "deaths.4-5-6":  {
+                                      "text":  "公布昨夜出局情况。四号、五号、六号玩家出局。",
+                                      "file":  "deaths.4-5-6.wav",
+                                      "durationMs":  7605
+                                  },
+                 "deaths.1-4-5-6":  {
+                                        "text":  "公布昨夜出局情况。一号、四号、五号、六号玩家出局。",
+                                        "file":  "deaths.1-4-5-6.wav",
+                                        "durationMs":  8606
+                                    },
+                 "deaths.2-4-5-6":  {
+                                        "text":  "公布昨夜出局情况。二号、四号、五号、六号玩家出局。",
+                                        "file":  "deaths.2-4-5-6.wav",
+                                        "durationMs":  8638
+                                    },
+                 "deaths.1-2-4-5-6":  {
+                                          "text":  "公布昨夜出局情况。一号、二号、四号、五号、六号玩家出局。",
+                                          "file":  "deaths.1-2-4-5-6.wav",
+                                          "durationMs":  9633
+                                      },
+                 "deaths.3-4-5-6":  {
+                                        "text":  "公布昨夜出局情况。三号、四号、五号、六号玩家出局。",
+                                        "file":  "deaths.3-4-5-6.wav",
+                                        "durationMs":  8715
+                                    },
+                 "deaths.1-3-4-5-6":  {
+                                          "text":  "公布昨夜出局情况。一号、三号、四号、五号、六号玩家出局。",
+                                          "file":  "deaths.1-3-4-5-6.wav",
+                                          "durationMs":  9697
+                                      },
+                 "deaths.2-3-4-5-6":  {
+                                          "text":  "公布昨夜出局情况。二号、三号、四号、五号、六号玩家出局。",
+                                          "file":  "deaths.2-3-4-5-6.wav",
+                                          "durationMs":  9745
+                                      },
+                 "deaths.1-2-3-4-5-6":  {
+                                            "text":  "公布昨夜出局情况。一号、二号、三号、四号、五号、六号玩家出局。",
+                                            "file":  "deaths.1-2-3-4-5-6.wav",
+                                            "durationMs":  10737
+                                        },
+                 "count.1":  {
+                                 "text":  "一",
+                                 "file":  "count.1.wav",
+                                 "durationMs":  441
+                             },
+                 "count.2":  {
+                                 "text":  "二",
+                                 "file":  "count.2.wav",
+                                 "durationMs":  442
+                             },
+                 "count.3":  {
+                                 "text":  "三",
+                                 "file":  "count.3.wav",
+                                 "durationMs":  544
+                             },
+                 "count.4":  {
+                                 "text":  "四",
+                                 "file":  "count.4.wav",
+                                 "durationMs":  505
+                             },
+                 "count.5":  {
+                                 "text":  "五",
+                                 "file":  "count.5.wav",
+                                 "durationMs":  515
+                             },
+                 "tally.1.0":  {
+                                   "text":  "一号获得零票。",
+                                   "file":  "tally.1.0.wav",
+                                   "durationMs":  2471
+                               },
+                 "electedVotes.1.0":  {
+                                          "text":  "一号获得零票，当选警长。",
+                                          "file":  "electedVotes.1.0.wav",
+                                          "durationMs":  4021
+                                      },
+                 "exiledVotes.1.0":  {
+                                         "text":  "一号获得零票，本轮被放逐。",
+                                         "file":  "exiledVotes.1.0.wav",
+                                         "durationMs":  4331
+                                     },
+                 "tally.1.1":  {
+                                   "text":  "一号获得一票。",
+                                   "file":  "tally.1.1.wav",
+                                   "durationMs":  2424
+                               },
+                 "electedVotes.1.1":  {
+                                          "text":  "一号获得一票，当选警长。",
+                                          "file":  "electedVotes.1.1.wav",
+                                          "durationMs":  3973
+                                      },
+                 "exiledVotes.1.1":  {
+                                         "text":  "一号获得一票，本轮被放逐。",
+                                         "file":  "exiledVotes.1.1.wav",
+                                         "durationMs":  4280
+                                     },
+                 "tally.1.2":  {
+                                   "text":  "一号获得二票。",
+                                   "file":  "tally.1.2.wav",
+                                   "durationMs":  2445
+                               },
+                 "electedVotes.1.2":  {
+                                          "text":  "一号获得二票，当选警长。",
+                                          "file":  "electedVotes.1.2.wav",
+                                          "durationMs":  3990
+                                      },
+                 "exiledVotes.1.2":  {
+                                         "text":  "一号获得二票，本轮被放逐。",
+                                         "file":  "exiledVotes.1.2.wav",
+                                         "durationMs":  4312
+                                     },
+                 "tally.1.3":  {
+                                   "text":  "一号获得三票。",
+                                   "file":  "tally.1.3.wav",
+                                   "durationMs":  2505
+                               },
+                 "electedVotes.1.3":  {
+                                          "text":  "一号获得三票，当选警长。",
+                                          "file":  "electedVotes.1.3.wav",
+                                          "durationMs":  4056
+                                      },
+                 "exiledVotes.1.3":  {
+                                         "text":  "一号获得三票，本轮被放逐。",
+                                         "file":  "exiledVotes.1.3.wav",
+                                         "durationMs":  4366
+                                     },
+                 "tally.1.4":  {
+                                   "text":  "一号获得四票。",
+                                   "file":  "tally.1.4.wav",
+                                   "durationMs":  2492
+                               },
+                 "electedVotes.1.4":  {
+                                          "text":  "一号获得四票，当选警长。",
+                                          "file":  "electedVotes.1.4.wav",
+                                          "durationMs":  4027
+                                      },
+                 "exiledVotes.1.4":  {
+                                         "text":  "一号获得四票，本轮被放逐。",
+                                         "file":  "exiledVotes.1.4.wav",
+                                         "durationMs":  4343
+                                     },
+                 "tally.1.5":  {
+                                   "text":  "一号获得五票。",
+                                   "file":  "tally.1.5.wav",
+                                   "durationMs":  2459
+                               },
+                 "electedVotes.1.5":  {
+                                          "text":  "一号获得五票，当选警长。",
+                                          "file":  "electedVotes.1.5.wav",
+                                          "durationMs":  3985
+                                      },
+                 "exiledVotes.1.5":  {
+                                         "text":  "一号获得五票，本轮被放逐。",
+                                         "file":  "exiledVotes.1.5.wav",
+                                         "durationMs":  4306
+                                     },
+                 "tally.1.6":  {
+                                   "text":  "一号获得六票。",
+                                   "file":  "tally.1.6.wav",
+                                   "durationMs":  2474
+                               },
+                 "electedVotes.1.6":  {
+                                          "text":  "一号获得六票，当选警长。",
+                                          "file":  "electedVotes.1.6.wav",
+                                          "durationMs":  4030
+                                      },
+                 "exiledVotes.1.6":  {
+                                         "text":  "一号获得六票，本轮被放逐。",
+                                         "file":  "exiledVotes.1.6.wav",
+                                         "durationMs":  4331
+                                     },
+                 "sole.1":  {
+                                "text":  "一号是唯一候选人，无需投票，当选警长。",
+                                "file":  "sole.1.wav",
+                                "durationMs":  6005
+                            },
+                 "tally.2.0":  {
+                                   "text":  "二号获得零票。",
+                                   "file":  "tally.2.0.wav",
+                                   "durationMs":  2504
+                               },
+                 "electedVotes.2.0":  {
+                                          "text":  "二号获得零票，当选警长。",
+                                          "file":  "electedVotes.2.0.wav",
+                                          "durationMs":  4057
+                                      },
+                 "exiledVotes.2.0":  {
+                                         "text":  "二号获得零票，本轮被放逐。",
+                                         "file":  "exiledVotes.2.0.wav",
+                                         "durationMs":  4364
+                                     },
+                 "tally.2.1":  {
+                                   "text":  "二号获得一票。",
+                                   "file":  "tally.2.1.wav",
+                                   "durationMs":  2450
+                               },
+                 "electedVotes.2.1":  {
+                                          "text":  "二号获得一票，当选警长。",
+                                          "file":  "electedVotes.2.1.wav",
+                                          "durationMs":  3997
+                                      },
+                 "exiledVotes.2.1":  {
+                                         "text":  "二号获得一票，本轮被放逐。",
+                                         "file":  "exiledVotes.2.1.wav",
+                                         "durationMs":  4318
+                                     },
+                 "tally.2.2":  {
+                                   "text":  "二号获得二票。",
+                                   "file":  "tally.2.2.wav",
+                                   "durationMs":  2492
+                               },
+                 "electedVotes.2.2":  {
+                                          "text":  "二号获得二票，当选警长。",
+                                          "file":  "electedVotes.2.2.wav",
+                                          "durationMs":  4023
+                                      },
+                 "exiledVotes.2.2":  {
+                                         "text":  "二号获得二票，本轮被放逐。",
+                                         "file":  "exiledVotes.2.2.wav",
+                                         "durationMs":  4346
+                                     },
+                 "tally.2.3":  {
+                                   "text":  "二号获得三票。",
+                                   "file":  "tally.2.3.wav",
+                                   "durationMs":  2536
+                               },
+                 "electedVotes.2.3":  {
+                                          "text":  "二号获得三票，当选警长。",
+                                          "file":  "electedVotes.2.3.wav",
+                                          "durationMs":  4090
+                                      },
+                 "exiledVotes.2.3":  {
+                                         "text":  "二号获得三票，本轮被放逐。",
+                                         "file":  "exiledVotes.2.3.wav",
+                                         "durationMs":  4400
+                                     },
+                 "tally.2.4":  {
+                                   "text":  "二号获得四票。",
+                                   "file":  "tally.2.4.wav",
+                                   "durationMs":  2517
+                               },
+                 "electedVotes.2.4":  {
+                                          "text":  "二号获得四票，当选警长。",
+                                          "file":  "electedVotes.2.4.wav",
+                                          "durationMs":  4063
+                                      },
+                 "exiledVotes.2.4":  {
+                                         "text":  "二号获得四票，本轮被放逐。",
+                                         "file":  "exiledVotes.2.4.wav",
+                                         "durationMs":  4382
+                                     },
+                 "tally.2.5":  {
+                                   "text":  "二号获得五票。",
+                                   "file":  "tally.2.5.wav",
+                                   "durationMs":  2481
+                               },
+                 "electedVotes.2.5":  {
+                                          "text":  "二号获得五票，当选警长。",
+                                          "file":  "electedVotes.2.5.wav",
+                                          "durationMs":  4020
+                                      },
+                 "exiledVotes.2.5":  {
+                                         "text":  "二号获得五票，本轮被放逐。",
+                                         "file":  "exiledVotes.2.5.wav",
+                                         "durationMs":  4331
+                                     },
+                 "tally.2.6":  {
+                                   "text":  "二号获得六票。",
+                                   "file":  "tally.2.6.wav",
+                                   "durationMs":  2513
+                               },
+                 "electedVotes.2.6":  {
+                                          "text":  "二号获得六票，当选警长。",
+                                          "file":  "electedVotes.2.6.wav",
+                                          "durationMs":  4069
+                                      },
+                 "exiledVotes.2.6":  {
+                                         "text":  "二号获得六票，本轮被放逐。",
+                                         "file":  "exiledVotes.2.6.wav",
+                                         "durationMs":  4377
+                                     },
+                 "sole.2":  {
+                                "text":  "二号是唯一候选人，无需投票，当选警长。",
+                                "file":  "sole.2.wav",
+                                "durationMs":  6043
+                            },
+                 "tally.3.0":  {
+                                   "text":  "三号获得零票。",
+                                   "file":  "tally.3.0.wav",
+                                   "durationMs":  2574
+                               },
+                 "electedVotes.3.0":  {
+                                          "text":  "三号获得零票，当选警长。",
+                                          "file":  "electedVotes.3.0.wav",
+                                          "durationMs":  4118
+                                      },
+                 "exiledVotes.3.0":  {
+                                         "text":  "三号获得零票，本轮被放逐。",
+                                         "file":  "exiledVotes.3.0.wav",
+                                         "durationMs":  4432
+                                     },
+                 "tally.3.1":  {
+                                   "text":  "三号获得一票。",
+                                   "file":  "tally.3.1.wav",
+                                   "durationMs":  2518
+                               },
+                 "electedVotes.3.1":  {
+                                          "text":  "三号获得一票，当选警长。",
+                                          "file":  "electedVotes.3.1.wav",
+                                          "durationMs":  4062
+                                      },
+                 "exiledVotes.3.1":  {
+                                         "text":  "三号获得一票，本轮被放逐。",
+                                         "file":  "exiledVotes.3.1.wav",
+                                         "durationMs":  4388
+                                     },
+                 "tally.3.2":  {
+                                   "text":  "三号获得二票。",
+                                   "file":  "tally.3.2.wav",
+                                   "durationMs":  2537
+                               },
+                 "electedVotes.3.2":  {
+                                          "text":  "三号获得二票，当选警长。",
+                                          "file":  "electedVotes.3.2.wav",
+                                          "durationMs":  4100
+                                      },
+                 "exiledVotes.3.2":  {
+                                         "text":  "三号获得二票，本轮被放逐。",
+                                         "file":  "exiledVotes.3.2.wav",
+                                         "durationMs":  4409
+                                     },
+                 "tally.3.3":  {
+                                   "text":  "三号获得三票。",
+                                   "file":  "tally.3.3.wav",
+                                   "durationMs":  2599
+                               },
+                 "electedVotes.3.3":  {
+                                          "text":  "三号获得三票，当选警长。",
+                                          "file":  "electedVotes.3.3.wav",
+                                          "durationMs":  4139
+                                      },
+                 "exiledVotes.3.3":  {
+                                         "text":  "三号获得三票，本轮被放逐。",
+                                         "file":  "exiledVotes.3.3.wav",
+                                         "durationMs":  4465
+                                     },
+                 "tally.3.4":  {
+                                   "text":  "三号获得四票。",
+                                   "file":  "tally.3.4.wav",
+                                   "durationMs":  2580
+                               },
+                 "electedVotes.3.4":  {
+                                          "text":  "三号获得四票，当选警长。",
+                                          "file":  "electedVotes.3.4.wav",
+                                          "durationMs":  4120
+                                      },
+                 "exiledVotes.3.4":  {
+                                         "text":  "三号获得四票，本轮被放逐。",
+                                         "file":  "exiledVotes.3.4.wav",
+                                         "durationMs":  4426
+                                     },
+                 "tally.3.5":  {
+                                   "text":  "三号获得五票。",
+                                   "file":  "tally.3.5.wav",
+                                   "durationMs":  2541
+                               },
+                 "electedVotes.3.5":  {
+                                          "text":  "三号获得五票，当选警长。",
+                                          "file":  "electedVotes.3.5.wav",
+                                          "durationMs":  4082
+                                      },
+                 "exiledVotes.3.5":  {
+                                         "text":  "三号获得五票，本轮被放逐。",
+                                         "file":  "exiledVotes.3.5.wav",
+                                         "durationMs":  4391
+                                     },
+                 "tally.3.6":  {
+                                   "text":  "三号获得六票。",
+                                   "file":  "tally.3.6.wav",
+                                   "durationMs":  2575
+                               },
+                 "electedVotes.3.6":  {
+                                          "text":  "三号获得六票，当选警长。",
+                                          "file":  "electedVotes.3.6.wav",
+                                          "durationMs":  4120
+                                      },
+                 "exiledVotes.3.6":  {
+                                         "text":  "三号获得六票，本轮被放逐。",
+                                         "file":  "exiledVotes.3.6.wav",
+                                         "durationMs":  4437
+                                     },
+                 "sole.3":  {
+                                "text":  "三号是唯一候选人，无需投票，当选警长。",
+                                "file":  "sole.3.wav",
+                                "durationMs":  6104
+                            },
+                 "tally.4.0":  {
+                                   "text":  "四号获得零票。",
+                                   "file":  "tally.4.0.wav",
+                                   "durationMs":  2527
+                               },
+                 "electedVotes.4.0":  {
+                                          "text":  "四号获得零票，当选警长。",
+                                          "file":  "electedVotes.4.0.wav",
+                                          "durationMs":  4076
+                                      },
+                 "exiledVotes.4.0":  {
+                                         "text":  "四号获得零票，本轮被放逐。",
+                                         "file":  "exiledVotes.4.0.wav",
+                                         "durationMs":  4390
+                                     },
+                 "tally.4.1":  {
+                                   "text":  "四号获得一票。",
+                                   "file":  "tally.4.1.wav",
+                                   "durationMs":  2469
+                               },
+                 "electedVotes.4.1":  {
+                                          "text":  "四号获得一票，当选警长。",
+                                          "file":  "electedVotes.4.1.wav",
+                                          "durationMs":  4025
+                                      },
+                 "exiledVotes.4.1":  {
+                                         "text":  "四号获得一票，本轮被放逐。",
+                                         "file":  "exiledVotes.4.1.wav",
+                                         "durationMs":  4340
+                                     },
+                 "tally.4.2":  {
+                                   "text":  "四号获得二票。",
+                                   "file":  "tally.4.2.wav",
+                                   "durationMs":  2502
+                               },
+                 "electedVotes.4.2":  {
+                                          "text":  "四号获得二票，当选警长。",
+                                          "file":  "electedVotes.4.2.wav",
+                                          "durationMs":  4063
+                                      },
+                 "exiledVotes.4.2":  {
+                                         "text":  "四号获得二票，本轮被放逐。",
+                                         "file":  "exiledVotes.4.2.wav",
+                                         "durationMs":  4365
+                                     },
+                 "tally.4.3":  {
+                                   "text":  "四号获得三票。",
+                                   "file":  "tally.4.3.wav",
+                                   "durationMs":  2569
+                               },
+                 "electedVotes.4.3":  {
+                                          "text":  "四号获得三票，当选警长。",
+                                          "file":  "electedVotes.4.3.wav",
+                                          "durationMs":  4101
+                                      },
+                 "exiledVotes.4.3":  {
+                                         "text":  "四号获得三票，本轮被放逐。",
+                                         "file":  "exiledVotes.4.3.wav",
+                                         "durationMs":  4418
+                                     },
+                 "tally.4.4":  {
+                                   "text":  "四号获得四票。",
+                                   "file":  "tally.4.4.wav",
+                                   "durationMs":  2536
+                               },
+                 "electedVotes.4.4":  {
+                                          "text":  "四号获得四票，当选警长。",
+                                          "file":  "electedVotes.4.4.wav",
+                                          "durationMs":  4081
+                                      },
+                 "exiledVotes.4.4":  {
+                                         "text":  "四号获得四票，本轮被放逐。",
+                                         "file":  "exiledVotes.4.4.wav",
+                                         "durationMs":  4391
+                                     },
+                 "tally.4.5":  {
+                                   "text":  "四号获得五票。",
+                                   "file":  "tally.4.5.wav",
+                                   "durationMs":  2513
+                               },
+                 "electedVotes.4.5":  {
+                                          "text":  "四号获得五票，当选警长。",
+                                          "file":  "electedVotes.4.5.wav",
+                                          "durationMs":  4037
+                                      },
+                 "exiledVotes.4.5":  {
+                                         "text":  "四号获得五票，本轮被放逐。",
+                                         "file":  "exiledVotes.4.5.wav",
+                                         "durationMs":  4348
+                                     },
+                 "tally.4.6":  {
+                                   "text":  "四号获得六票。",
+                                   "file":  "tally.4.6.wav",
+                                   "durationMs":  2531
+                               },
+                 "electedVotes.4.6":  {
+                                          "text":  "四号获得六票，当选警长。",
+                                          "file":  "electedVotes.4.6.wav",
+                                          "durationMs":  4081
+                                      },
+                 "exiledVotes.4.6":  {
+                                         "text":  "四号获得六票，本轮被放逐。",
+                                         "file":  "exiledVotes.4.6.wav",
+                                         "durationMs":  4398
+                                     },
+                 "sole.4":  {
+                                "text":  "四号是唯一候选人，无需投票，当选警长。",
+                                "file":  "sole.4.wav",
+                                "durationMs":  6074
+                            },
+                 "tally.5.0":  {
+                                   "text":  "五号获得零票。",
+                                   "file":  "tally.5.0.wav",
+                                   "durationMs":  2469
+                               },
+                 "electedVotes.5.0":  {
+                                          "text":  "五号获得零票，当选警长。",
+                                          "file":  "electedVotes.5.0.wav",
+                                          "durationMs":  3997
+                                      },
+                 "exiledVotes.5.0":  {
+                                         "text":  "五号获得零票，本轮被放逐。",
+                                         "file":  "exiledVotes.5.0.wav",
+                                         "durationMs":  4324
+                                     },
+                 "tally.5.1":  {
+                                   "text":  "五号获得一票。",
+                                   "file":  "tally.5.1.wav",
+                                   "durationMs":  2420
+                               },
+                 "electedVotes.5.1":  {
+                                          "text":  "五号获得一票，当选警长。",
+                                          "file":  "electedVotes.5.1.wav",
+                                          "durationMs":  3955
+                                      },
+                 "exiledVotes.5.1":  {
+                                         "text":  "五号获得一票，本轮被放逐。",
+                                         "file":  "exiledVotes.5.1.wav",
+                                         "durationMs":  4275
+                                     },
+                 "tally.5.2":  {
+                                   "text":  "五号获得二票。",
+                                   "file":  "tally.5.2.wav",
+                                   "durationMs":  2445
+                               },
+                 "electedVotes.5.2":  {
+                                          "text":  "五号获得二票，当选警长。",
+                                          "file":  "electedVotes.5.2.wav",
+                                          "durationMs":  3980
+                                      },
+                 "exiledVotes.5.2":  {
+                                         "text":  "五号获得二票，本轮被放逐。",
+                                         "file":  "exiledVotes.5.2.wav",
+                                         "durationMs":  4297
+                                     },
+                 "tally.5.3":  {
+                                   "text":  "五号获得三票。",
+                                   "file":  "tally.5.3.wav",
+                                   "durationMs":  2507
+                               },
+                 "electedVotes.5.3":  {
+                                          "text":  "五号获得三票，当选警长。",
+                                          "file":  "electedVotes.5.3.wav",
+                                          "durationMs":  4032
+                                      },
+                 "exiledVotes.5.3":  {
+                                         "text":  "五号获得三票，本轮被放逐。",
+                                         "file":  "exiledVotes.5.3.wav",
+                                         "durationMs":  4352
+                                     },
+                 "tally.5.4":  {
+                                   "text":  "五号获得四票。",
+                                   "file":  "tally.5.4.wav",
+                                   "durationMs":  2491
+                               },
+                 "electedVotes.5.4":  {
+                                          "text":  "五号获得四票，当选警长。",
+                                          "file":  "electedVotes.5.4.wav",
+                                          "durationMs":  4010
+                                      },
+                 "exiledVotes.5.4":  {
+                                         "text":  "五号获得四票，本轮被放逐。",
+                                         "file":  "exiledVotes.5.4.wav",
+                                         "durationMs":  4322
+                                     },
+                 "tally.5.5":  {
+                                   "text":  "五号获得五票。",
+                                   "file":  "tally.5.5.wav",
+                                   "durationMs":  2451
+                               },
+                 "electedVotes.5.5":  {
+                                          "text":  "五号获得五票，当选警长。",
+                                          "file":  "electedVotes.5.5.wav",
+                                          "durationMs":  3975
+                                      },
+                 "exiledVotes.5.5":  {
+                                         "text":  "五号获得五票，本轮被放逐。",
+                                         "file":  "exiledVotes.5.5.wav",
+                                         "durationMs":  4281
+                                     },
+                 "tally.5.6":  {
+                                   "text":  "五号获得六票。",
+                                   "file":  "tally.5.6.wav",
+                                   "durationMs":  2485
+                               },
+                 "electedVotes.5.6":  {
+                                          "text":  "五号获得六票，当选警长。",
+                                          "file":  "electedVotes.5.6.wav",
+                                          "durationMs":  4015
+                                      },
+                 "exiledVotes.5.6":  {
+                                         "text":  "五号获得六票，本轮被放逐。",
+                                         "file":  "exiledVotes.5.6.wav",
+                                         "durationMs":  4323
+                                     },
+                 "sole.5":  {
+                                "text":  "五号是唯一候选人，无需投票，当选警长。",
+                                "file":  "sole.5.wav",
+                                "durationMs":  6001
+                            },
+                 "tally.6.0":  {
+                                   "text":  "六号获得零票。",
+                                   "file":  "tally.6.0.wav",
+                                   "durationMs":  2525
+                               },
+                 "electedVotes.6.0":  {
+                                          "text":  "六号获得零票，当选警长。",
+                                          "file":  "electedVotes.6.0.wav",
+                                          "durationMs":  4082
+                                      },
+                 "exiledVotes.6.0":  {
+                                         "text":  "六号获得零票，本轮被放逐。",
+                                         "file":  "exiledVotes.6.0.wav",
+                                         "durationMs":  4392
+                                     },
+                 "tally.6.1":  {
+                                   "text":  "六号获得一票。",
+                                   "file":  "tally.6.1.wav",
+                                   "durationMs":  2469
+                               },
+                 "electedVotes.6.1":  {
+                                          "text":  "六号获得一票，当选警长。",
+                                          "file":  "electedVotes.6.1.wav",
+                                          "durationMs":  4018
+                                      },
+                 "exiledVotes.6.1":  {
+                                         "text":  "六号获得一票，本轮被放逐。",
+                                         "file":  "exiledVotes.6.1.wav",
+                                         "durationMs":  4337
+                                     },
+                 "tally.6.2":  {
+                                   "text":  "六号获得二票。",
+                                   "file":  "tally.6.2.wav",
+                                   "durationMs":  2502
+                               },
+                 "electedVotes.6.2":  {
+                                          "text":  "六号获得二票，当选警长。",
+                                          "file":  "electedVotes.6.2.wav",
+                                          "durationMs":  4058
+                                      },
+                 "exiledVotes.6.2":  {
+                                         "text":  "六号获得二票，本轮被放逐。",
+                                         "file":  "exiledVotes.6.2.wav",
+                                         "durationMs":  4365
+                                     },
+                 "tally.6.3":  {
+                                   "text":  "六号获得三票。",
+                                   "file":  "tally.6.3.wav",
+                                   "durationMs":  2562
+                               },
+                 "electedVotes.6.3":  {
+                                          "text":  "六号获得三票，当选警长。",
+                                          "file":  "electedVotes.6.3.wav",
+                                          "durationMs":  4113
+                                      },
+                 "exiledVotes.6.3":  {
+                                         "text":  "六号获得三票，本轮被放逐。",
+                                         "file":  "exiledVotes.6.3.wav",
+                                         "durationMs":  4417
+                                     },
+                 "tally.6.4":  {
+                                   "text":  "六号获得四票。",
+                                   "file":  "tally.6.4.wav",
+                                   "durationMs":  2542
+                               },
+                 "electedVotes.6.4":  {
+                                          "text":  "六号获得四票，当选警长。",
+                                          "file":  "electedVotes.6.4.wav",
+                                          "durationMs":  4086
+                                      },
+                 "exiledVotes.6.4":  {
+                                         "text":  "六号获得四票，本轮被放逐。",
+                                         "file":  "exiledVotes.6.4.wav",
+                                         "durationMs":  4405
+                                     },
+                 "tally.6.5":  {
+                                   "text":  "六号获得五票。",
+                                   "file":  "tally.6.5.wav",
+                                   "durationMs":  2507
+                               },
+                 "electedVotes.6.5":  {
+                                          "text":  "六号获得五票，当选警长。",
+                                          "file":  "electedVotes.6.5.wav",
+                                          "durationMs":  4040
+                                      },
+                 "exiledVotes.6.5":  {
+                                         "text":  "六号获得五票，本轮被放逐。",
+                                         "file":  "exiledVotes.6.5.wav",
+                                         "durationMs":  4361
+                                     },
+                 "tally.6.6":  {
+                                   "text":  "六号获得六票。",
+                                   "file":  "tally.6.6.wav",
+                                   "durationMs":  2531
+                               },
+                 "electedVotes.6.6":  {
+                                          "text":  "六号获得六票，当选警长。",
+                                          "file":  "electedVotes.6.6.wav",
+                                          "durationMs":  4083
+                                      },
+                 "exiledVotes.6.6":  {
+                                         "text":  "六号获得六票，本轮被放逐。",
+                                         "file":  "exiledVotes.6.6.wav",
+                                         "durationMs":  4392
+                                     },
+                 "sole.6":  {
+                                "text":  "六号是唯一候选人，无需投票，当选警长。",
+                                "file":  "sole.6.wav",
+                                "durationMs":  6061
+                            },
+                 "vote.sheriff.tie":  {
+                                          "text":  "本轮竞选平票，本局没有警长。",
+                                          "file":  "vote.sheriff.tie.wav",
+                                          "durationMs":  4643
+                                      },
+                 "vote.sheriff.abstain":  {
+                                              "text":  "全员弃票，所有候选人均为零票，本局没有警长。",
+                                              "file":  "vote.sheriff.abstain.wav",
+                                              "durationMs":  6843
+                                          },
+                 "vote.sheriff.empty":  {
+                                            "text":  "无人参选，本局没有警长。",
+                                            "file":  "vote.sheriff.empty.wav",
+                                            "durationMs":  3985
+                                        },
+                 "vote.sheriff.noVoters":  {
+                                               "text":  "没有警下选民，本局没有警长。",
+                                               "file":  "vote.sheriff.noVoters.wav",
+                                               "durationMs":  4561
+                                           },
+                 "vote.exile.tie":  {
+                                        "text":  "本轮平票，无人被放逐。",
+                                        "file":  "vote.exile.tie.wav",
+                                        "durationMs":  3835
+                                    },
+                 "vote.exile.abstain":  {
+                                            "text":  "全员弃票，所有玩家均为零票，无人被放逐。",
+                                            "file":  "vote.exile.abstain.wav",
+                                            "durationMs":  6371
+                                        },
+                 "vote.exile.sheriff":  {
+                                            "text":  "本轮平票，按警长投票对象裁决。",
+                                            "file":  "vote.exile.sheriff.wav",
+                                            "durationMs":  5035
+                                        },
+                 "loss.first.1":  {
+                                      "text":  "一号失去一张身份牌，剩余一张身份牌。",
+                                      "file":  "loss.first.1.wav",
+                                      "durationMs":  5575
+                                  },
+                 "loss.first.2":  {
+                                      "text":  "二号失去一张身份牌，剩余一张身份牌。",
+                                      "file":  "loss.first.2.wav",
+                                      "durationMs":  5618
+                                  },
+                 "loss.first.3":  {
+                                      "text":  "三号失去一张身份牌，剩余一张身份牌。",
+                                      "file":  "loss.first.3.wav",
+                                      "durationMs":  5667
+                                  },
+                 "loss.first.4":  {
+                                      "text":  "四号失去一张身份牌，剩余一张身份牌。",
+                                      "file":  "loss.first.4.wav",
+                                      "durationMs":  5618
+                                  },
+                 "loss.first.5":  {
+                                      "text":  "五号失去一张身份牌，剩余一张身份牌。",
+                                      "file":  "loss.first.5.wav",
+                                      "durationMs":  5556
+                                  },
+                 "loss.first.6":  {
+                                      "text":  "六号失去一张身份牌，剩余一张身份牌。",
+                                      "file":  "loss.first.6.wav",
+                                      "durationMs":  5626
+                                  },
+                 "loss.last.1":  {
+                                     "text":  "一号失去最后一张身份牌，完全出局。",
+                                     "file":  "loss.last.1.wav",
+                                     "durationMs":  5464
+                                 },
+                 "loss.last.2":  {
+                                     "text":  "二号失去最后一张身份牌，完全出局。",
+                                     "file":  "loss.last.2.wav",
+                                     "durationMs":  5494
+                                 },
+                 "loss.last.3":  {
+                                     "text":  "三号失去最后一张身份牌，完全出局。",
+                                     "file":  "loss.last.3.wav",
+                                     "durationMs":  5561
+                                 },
+                 "loss.last.4":  {
+                                     "text":  "四号失去最后一张身份牌，完全出局。",
+                                     "file":  "loss.last.4.wav",
+                                     "durationMs":  5523
+                                 },
+                 "loss.last.5":  {
+                                     "text":  "五号失去最后一张身份牌，完全出局。",
+                                     "file":  "loss.last.5.wav",
+                                     "durationMs":  5449
+                                 },
+                 "loss.last.6":  {
+                                     "text":  "六号失去最后一张身份牌，完全出局。",
+                                     "file":  "loss.last.6.wav",
+                                     "durationMs":  5522
+                                 },
+                 "loss.nightFirst.1":  {
+                                           "text":  "一号昨夜失去一张身份牌，剩余一张身份牌。",
+                                           "file":  "loss.nightFirst.1.wav",
+                                           "durationMs":  5998
+                                       },
+                 "loss.nightFirst.2":  {
+                                           "text":  "二号昨夜失去一张身份牌，剩余一张身份牌。",
+                                           "file":  "loss.nightFirst.2.wav",
+                                           "durationMs":  6012
+                                       },
+                 "loss.nightFirst.3":  {
+                                           "text":  "三号昨夜失去一张身份牌，剩余一张身份牌。",
+                                           "file":  "loss.nightFirst.3.wav",
+                                           "durationMs":  6087
+                                       },
+                 "loss.nightFirst.4":  {
+                                           "text":  "四号昨夜失去一张身份牌，剩余一张身份牌。",
+                                           "file":  "loss.nightFirst.4.wav",
+                                           "durationMs":  6041
+                                       },
+                 "loss.nightFirst.5":  {
+                                           "text":  "五号昨夜失去一张身份牌，剩余一张身份牌。",
+                                           "file":  "loss.nightFirst.5.wav",
+                                           "durationMs":  5973
+                                       },
+                 "loss.nightFirst.6":  {
+                                           "text":  "六号昨夜失去一张身份牌，剩余一张身份牌。",
+                                           "file":  "loss.nightFirst.6.wav",
+                                           "durationMs":  6029
+                                       },
+                 "loss.nightLast.1":  {
+                                          "text":  "一号昨夜失去最后一张身份牌，完全出局。",
+                                          "file":  "loss.nightLast.1.wav",
+                                          "durationMs":  5891
+                                      },
+                 "loss.nightLast.2":  {
+                                          "text":  "二号昨夜失去最后一张身份牌，完全出局。",
+                                          "file":  "loss.nightLast.2.wav",
+                                          "durationMs":  5906
+                                      },
+                 "loss.nightLast.3":  {
+                                          "text":  "三号昨夜失去最后一张身份牌，完全出局。",
+                                          "file":  "loss.nightLast.3.wav",
+                                          "durationMs":  5977
+                                      },
+                 "loss.nightLast.4":  {
+                                          "text":  "四号昨夜失去最后一张身份牌，完全出局。",
+                                          "file":  "loss.nightLast.4.wav",
+                                          "durationMs":  5936
+                                      },
+                 "loss.nightLast.5":  {
+                                          "text":  "五号昨夜失去最后一张身份牌，完全出局。",
+                                          "file":  "loss.nightLast.5.wav",
+                                          "durationMs":  5867
+                                      },
+                 "loss.nightLast.6":  {
+                                          "text":  "六号昨夜失去最后一张身份牌，完全出局。",
+                                          "file":  "loss.nightLast.6.wav",
+                                          "durationMs":  5925
+                                      },
+                 "loss.nightDouble.1":  {
+                                            "text":  "一号昨夜失去两张身份牌，完全出局。",
+                                            "file":  "loss.nightDouble.1.wav",
+                                            "durationMs":  5407
+                                        },
+                 "loss.nightDouble.2":  {
+                                            "text":  "二号昨夜失去两张身份牌，完全出局。",
+                                            "file":  "loss.nightDouble.2.wav",
+                                            "durationMs":  5417
+                                        },
+                 "loss.nightDouble.3":  {
+                                            "text":  "三号昨夜失去两张身份牌，完全出局。",
+                                            "file":  "loss.nightDouble.3.wav",
+                                            "durationMs":  5498
+                                        },
+                 "loss.nightDouble.4":  {
+                                            "text":  "四号昨夜失去两张身份牌，完全出局。",
+                                            "file":  "loss.nightDouble.4.wav",
+                                            "durationMs":  5456
+                                        },
+                 "loss.nightDouble.5":  {
+                                            "text":  "五号昨夜失去两张身份牌，完全出局。",
+                                            "file":  "loss.nightDouble.5.wav",
+                                            "durationMs":  5393
+                                        },
+                 "loss.nightDouble.6":  {
+                                            "text":  "六号昨夜失去两张身份牌，完全出局。",
+                                            "file":  "loss.nightDouble.6.wav",
+                                            "durationMs":  5453
+                                        }
+             }
+}

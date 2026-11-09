@@ -1,0 +1,624 @@
+{
+    "id":  "zh-neutral-v1",
+    "label":  "中性中文法官",
+    "voice":  "Microsoft Huihui Desktop",
+    "waitMs":  25000,
+    "gapMs":  250,
+    "cues":  {
+                 "test":  {
+                              "text":  "语音测试。请确认音量合适。",
+                              "file":  "test.wav",
+                              "durationMs":  4786
+                          },
+                 "night.start":  {
+                                     "text":  "天黑了，请闭眼。",
+                                     "file":  "night.start.wav",
+                                     "durationMs":  2935
+                                 },
+                 "GUARD.open":  {
+                                    "text":  "守卫请睁眼。请在手机上选择守护目标。",
+                                    "file":  "GUARD.open.wav",
+                                    "durationMs":  6284
+                                },
+                 "GUARD.close":  {
+                                     "text":  "守卫请闭眼。",
+                                     "file":  "GUARD.close.wav",
+                                     "durationMs":  2307
+                                 },
+                 "WOLF.open":  {
+                                   "text":  "狼人请睁眼。请在手机上查看狼队信息，完成本夜可执行的操作。",
+                                   "file":  "WOLF.open.wav",
+                                   "durationMs":  9368
+                               },
+                 "WOLF.close":  {
+                                    "text":  "狼人请闭眼。",
+                                    "file":  "WOLF.close.wav",
+                                    "durationMs":  2382
+                                },
+                 "WITCH.open":  {
+                                    "text":  "女巫请睁眼。请查看手机上的信息，选择是否使用药品。",
+                                    "file":  "WITCH.open.wav",
+                                    "durationMs":  8256
+                                },
+                 "WITCH.close":  {
+                                     "text":  "女巫请闭眼。",
+                                     "file":  "WITCH.close.wav",
+                                     "durationMs":  2222
+                                 },
+                 "SEER.open":  {
+                                   "text":  "预言家请睁眼。请选择查验目标，确认查验，并在手机上查看结果。",
+                                   "file":  "SEER.open.wav",
+                                   "durationMs":  9711
+                               },
+                 "SEER.close":  {
+                                    "text":  "预言家请闭眼。",
+                                    "file":  "SEER.close.wav",
+                                    "durationMs":  2494
+                                },
+                 "STALKER.open":  {
+                                      "text":  "潜行者请睁眼。请在手机上选择是否发动技能。",
+                                      "file":  "STALKER.open.wav",
+                                      "durationMs":  7147
+                                  },
+                 "STALKER.close":  {
+                                       "text":  "潜行者请闭眼。",
+                                       "file":  "STALKER.close.wav",
+                                       "durationMs":  2617
+                                   },
+                 "signup":  {
+                                "text":  "首夜行动结束。请保持安静，在手机上选择上警或留在警下。",
+                                "file":  "signup.wav",
+                                "durationMs":  8787
+                            },
+                 "withdraw":  {
+                                  "text":  "现在进入最后的退水与自爆倒计时。",
+                                  "file":  "withdraw.wav",
+                                  "durationMs":  4734
+                              },
+                 "sheriff.vote":  {
+                                      "text":  "退水结束。请警下玩家在手机上投票。",
+                                      "file":  "sheriff.vote.wav",
+                                      "durationMs":  5857
+                                  },
+                 "dawn.ready":  {
+                                    "text":  "警长竞选结束，等待公布昨夜结果。",
+                                    "file":  "dawn.ready.wav",
+                                    "durationMs":  5061
+                                },
+                 "discussion":  {
+                                    "text":  "天亮了，请睁眼。进入白天讨论。",
+                                    "file":  "discussion.wav",
+                                    "durationMs":  5456
+                                },
+                 "vote":  {
+                              "text":  "讨论结束。请在手机上提交放逐投票。",
+                              "file":  "vote.wav",
+                              "durationMs":  5866
+                          },
+                 "badge":  {
+                               "text":  "请出局警长在手机上选择移交警徽，或放弃移交。",
+                               "file":  "badge.wav",
+                               "durationMs":  6831
+                           },
+                 "winner.VILLAGE":  {
+                                        "text":  "游戏结束，好人获胜。",
+                                        "file":  "winner.VILLAGE.wav",
+                                        "durationMs":  3485
+                                    },
+                 "winner.WOLF":  {
+                                     "text":  "游戏结束，狼人获胜。",
+                                     "file":  "winner.WOLF.wav",
+                                     "durationMs":  3465
+                                 },
+                 "deaths.none":  {
+                                     "text":  "昨夜无人完全出局。",
+                                     "file":  "deaths.none.wav",
+                                     "durationMs":  3072
+                                 },
+                 "deaths.prefix":  {
+                                       "text":  "昨夜完全出局的玩家是。",
+                                       "file":  "deaths.prefix.wav",
+                                       "durationMs":  3367
+                                   },
+                 "sheriff.none":  {
+                                      "text":  "本局没有警长。",
+                                      "file":  "sheriff.none.wav",
+                                      "durationMs":  2486
+                                  },
+                 "sheriff.lost":  {
+                                      "text":  "警徽流失，本局没有警长。",
+                                      "file":  "sheriff.lost.wav",
+                                      "durationMs":  3990
+                                  },
+                 "vote.none":  {
+                                   "text":  "本日无人被放逐。",
+                                   "file":  "vote.none.wav",
+                                   "durationMs":  2692
+                               },
+                 "vote.sheriff":  {
+                                      "text":  "现在公布警长选票。",
+                                      "file":  "vote.sheriff.wav",
+                                      "durationMs":  3171
+                                  },
+                 "vote.exile":  {
+                                    "text":  "现在公布放逐选票。",
+                                    "file":  "vote.exile.wav",
+                                    "durationMs":  3112
+                                },
+                 "speaker.1":  {
+                                   "text":  "一号玩家，请开始竞选发言。",
+                                   "file":  "speaker.1.wav",
+                                   "durationMs":  4410
+                               },
+                 "seat.1":  {
+                                "text":  "一号。",
+                                "file":  "seat.1.wav",
+                                "durationMs":  1497
+                            },
+                 "elected.1":  {
+                                   "text":  "一号当选警长。",
+                                   "file":  "elected.1.wav",
+                                   "durationMs":  2563
+                               },
+                 "withdrawn.1":  {
+                                     "text":  "一号退水。",
+                                     "file":  "withdrawn.1.wav",
+                                     "durationMs":  2090
+                                 },
+                 "exploded.1":  {
+                                    "text":  "一号发动自爆。",
+                                    "file":  "exploded.1.wav",
+                                    "durationMs":  2420
+                                },
+                 "eliminated.1":  {
+                                      "text":  "一号完全出局。",
+                                      "file":  "eliminated.1.wav",
+                                      "durationMs":  2607
+                                  },
+                 "exiled.1":  {
+                                  "text":  "一号被放逐，失去一张身份。",
+                                  "file":  "exiled.1.wav",
+                                  "durationMs":  4193
+                              },
+                 "transfer.1":  {
+                                    "text":  "警徽移交给一号。",
+                                    "file":  "transfer.1.wav",
+                                    "durationMs":  2789
+                                },
+                 "ballot.1.0":  {
+                                    "text":  "一号弃票。",
+                                    "file":  "ballot.1.0.wav",
+                                    "durationMs":  2004
+                                },
+                 "ballot.1.1":  {
+                                    "text":  "一号投给一号。",
+                                    "file":  "ballot.1.1.wav",
+                                    "durationMs":  2461
+                                },
+                 "ballot.1.2":  {
+                                    "text":  "一号投给二号。",
+                                    "file":  "ballot.1.2.wav",
+                                    "durationMs":  2491
+                                },
+                 "ballot.1.3":  {
+                                    "text":  "一号投给三号。",
+                                    "file":  "ballot.1.3.wav",
+                                    "durationMs":  2546
+                                },
+                 "ballot.1.4":  {
+                                    "text":  "一号投给四号。",
+                                    "file":  "ballot.1.4.wav",
+                                    "durationMs":  2514
+                                },
+                 "ballot.1.5":  {
+                                    "text":  "一号投给五号。",
+                                    "file":  "ballot.1.5.wav",
+                                    "durationMs":  2459
+                                },
+                 "ballot.1.6":  {
+                                    "text":  "一号投给六号。",
+                                    "file":  "ballot.1.6.wav",
+                                    "durationMs":  2502
+                                },
+                 "speaker.2":  {
+                                   "text":  "二号玩家，请开始竞选发言。",
+                                   "file":  "speaker.2.wav",
+                                   "durationMs":  4424
+                               },
+                 "seat.2":  {
+                                "text":  "二号。",
+                                "file":  "seat.2.wav",
+                                "durationMs":  1507
+                            },
+                 "elected.2":  {
+                                   "text":  "二号当选警长。",
+                                   "file":  "elected.2.wav",
+                                   "durationMs":  2598
+                               },
+                 "withdrawn.2":  {
+                                     "text":  "二号退水。",
+                                     "file":  "withdrawn.2.wav",
+                                     "durationMs":  2100
+                                 },
+                 "exploded.2":  {
+                                    "text":  "二号发动自爆。",
+                                    "file":  "exploded.2.wav",
+                                    "durationMs":  2452
+                                },
+                 "eliminated.2":  {
+                                      "text":  "二号完全出局。",
+                                      "file":  "eliminated.2.wav",
+                                      "durationMs":  2645
+                                  },
+                 "exiled.2":  {
+                                  "text":  "二号被放逐，失去一张身份。",
+                                  "file":  "exiled.2.wav",
+                                  "durationMs":  4232
+                              },
+                 "transfer.2":  {
+                                    "text":  "警徽移交给二号。",
+                                    "file":  "transfer.2.wav",
+                                    "durationMs":  2754
+                                },
+                 "ballot.2.0":  {
+                                    "text":  "二号弃票。",
+                                    "file":  "ballot.2.0.wav",
+                                    "durationMs":  2012
+                                },
+                 "ballot.2.1":  {
+                                    "text":  "二号投给一号。",
+                                    "file":  "ballot.2.1.wav",
+                                    "durationMs":  2492
+                                },
+                 "ballot.2.2":  {
+                                    "text":  "二号投给二号。",
+                                    "file":  "ballot.2.2.wav",
+                                    "durationMs":  2516
+                                },
+                 "ballot.2.3":  {
+                                    "text":  "二号投给三号。",
+                                    "file":  "ballot.2.3.wav",
+                                    "durationMs":  2576
+                                },
+                 "ballot.2.4":  {
+                                    "text":  "二号投给四号。",
+                                    "file":  "ballot.2.4.wav",
+                                    "durationMs":  2559
+                                },
+                 "ballot.2.5":  {
+                                    "text":  "二号投给五号。",
+                                    "file":  "ballot.2.5.wav",
+                                    "durationMs":  2491
+                                },
+                 "ballot.2.6":  {
+                                    "text":  "二号投给六号。",
+                                    "file":  "ballot.2.6.wav",
+                                    "durationMs":  2532
+                                },
+                 "speaker.3":  {
+                                   "text":  "三号玩家，请开始竞选发言。",
+                                   "file":  "speaker.3.wav",
+                                   "durationMs":  4497
+                               },
+                 "seat.3":  {
+                                "text":  "三号。",
+                                "file":  "seat.3.wav",
+                                "durationMs":  1585
+                            },
+                 "elected.3":  {
+                                   "text":  "三号当选警长。",
+                                   "file":  "elected.3.wav",
+                                   "durationMs":  2649
+                               },
+                 "withdrawn.3":  {
+                                     "text":  "三号退水。",
+                                     "file":  "withdrawn.3.wav",
+                                     "durationMs":  2178
+                                 },
+                 "exploded.3":  {
+                                    "text":  "三号发动自爆。",
+                                    "file":  "exploded.3.wav",
+                                    "durationMs":  2517
+                                },
+                 "eliminated.3":  {
+                                      "text":  "三号完全出局。",
+                                      "file":  "eliminated.3.wav",
+                                      "durationMs":  2710
+                                  },
+                 "exiled.3":  {
+                                  "text":  "三号被放逐，失去一张身份。",
+                                  "file":  "exiled.3.wav",
+                                  "durationMs":  4290
+                              },
+                 "transfer.3":  {
+                                    "text":  "警徽移交给三号。",
+                                    "file":  "transfer.3.wav",
+                                    "durationMs":  2890
+                                },
+                 "ballot.3.0":  {
+                                    "text":  "三号弃票。",
+                                    "file":  "ballot.3.0.wav",
+                                    "durationMs":  2090
+                                },
+                 "ballot.3.1":  {
+                                    "text":  "三号投给一号。",
+                                    "file":  "ballot.3.1.wav",
+                                    "durationMs":  2552
+                                },
+                 "ballot.3.2":  {
+                                    "text":  "三号投给二号。",
+                                    "file":  "ballot.3.2.wav",
+                                    "durationMs":  2576
+                                },
+                 "ballot.3.3":  {
+                                    "text":  "三号投给三号。",
+                                    "file":  "ballot.3.3.wav",
+                                    "durationMs":  2641
+                                },
+                 "ballot.3.4":  {
+                                    "text":  "三号投给四号。",
+                                    "file":  "ballot.3.4.wav",
+                                    "durationMs":  2613
+                                },
+                 "ballot.3.5":  {
+                                    "text":  "三号投给五号。",
+                                    "file":  "ballot.3.5.wav",
+                                    "durationMs":  2560
+                                },
+                 "ballot.3.6":  {
+                                    "text":  "三号投给六号。",
+                                    "file":  "ballot.3.6.wav",
+                                    "durationMs":  2597
+                                },
+                 "speaker.4":  {
+                                   "text":  "四号玩家，请开始竞选发言。",
+                                   "file":  "speaker.4.wav",
+                                   "durationMs":  4459
+                               },
+                 "seat.4":  {
+                                "text":  "四号。",
+                                "file":  "seat.4.wav",
+                                "durationMs":  1542
+                            },
+                 "elected.4":  {
+                                   "text":  "四号当选警长。",
+                                   "file":  "elected.4.wav",
+                                   "durationMs":  2618
+                               },
+                 "withdrawn.4":  {
+                                     "text":  "四号退水。",
+                                     "file":  "withdrawn.4.wav",
+                                     "durationMs":  2134
+                                 },
+                 "exploded.4":  {
+                                    "text":  "四号发动自爆。",
+                                    "file":  "exploded.4.wav",
+                                    "durationMs":  2469
+                                },
+                 "eliminated.4":  {
+                                      "text":  "四号完全出局。",
+                                      "file":  "eliminated.4.wav",
+                                      "durationMs":  2660
+                                  },
+                 "exiled.4":  {
+                                  "text":  "四号被放逐，失去一张身份。",
+                                  "file":  "exiled.4.wav",
+                                  "durationMs":  4251
+                              },
+                 "transfer.4":  {
+                                    "text":  "警徽移交给四号。",
+                                    "file":  "transfer.4.wav",
+                                    "durationMs":  2854
+                                },
+                 "ballot.4.0":  {
+                                    "text":  "四号弃票。",
+                                    "file":  "ballot.4.0.wav",
+                                    "durationMs":  2044
+                                },
+                 "ballot.4.1":  {
+                                    "text":  "四号投给一号。",
+                                    "file":  "ballot.4.1.wav",
+                                    "durationMs":  2508
+                                },
+                 "ballot.4.2":  {
+                                    "text":  "四号投给二号。",
+                                    "file":  "ballot.4.2.wav",
+                                    "durationMs":  2534
+                                },
+                 "ballot.4.3":  {
+                                    "text":  "四号投给三号。",
+                                    "file":  "ballot.4.3.wav",
+                                    "durationMs":  2603
+                                },
+                 "ballot.4.4":  {
+                                    "text":  "四号投给四号。",
+                                    "file":  "ballot.4.4.wav",
+                                    "durationMs":  2573
+                                },
+                 "ballot.4.5":  {
+                                    "text":  "四号投给五号。",
+                                    "file":  "ballot.4.5.wav",
+                                    "durationMs":  2521
+                                },
+                 "ballot.4.6":  {
+                                    "text":  "四号投给六号。",
+                                    "file":  "ballot.4.6.wav",
+                                    "durationMs":  2557
+                                },
+                 "speaker.5":  {
+                                   "text":  "五号玩家，请开始竞选发言。",
+                                   "file":  "speaker.5.wav",
+                                   "durationMs":  4377
+                               },
+                 "seat.5":  {
+                                "text":  "五号。",
+                                "file":  "seat.5.wav",
+                                "durationMs":  1490
+                            },
+                 "elected.5":  {
+                                   "text":  "五号当选警长。",
+                                   "file":  "elected.5.wav",
+                                   "durationMs":  2564
+                               },
+                 "withdrawn.5":  {
+                                     "text":  "五号退水。",
+                                     "file":  "withdrawn.5.wav",
+                                     "durationMs":  2076
+                                 },
+                 "exploded.5":  {
+                                    "text":  "五号发动自爆。",
+                                    "file":  "exploded.5.wav",
+                                    "durationMs":  2416
+                                },
+                 "eliminated.5":  {
+                                      "text":  "五号完全出局。",
+                                      "file":  "eliminated.5.wav",
+                                      "durationMs":  2606
+                                  },
+                 "exiled.5":  {
+                                  "text":  "五号被放逐，失去一张身份。",
+                                  "file":  "exiled.5.wav",
+                                  "durationMs":  4182
+                              },
+                 "transfer.5":  {
+                                    "text":  "警徽移交给五号。",
+                                    "file":  "transfer.5.wav",
+                                    "durationMs":  2777
+                                },
+                 "ballot.5.0":  {
+                                    "text":  "五号弃票。",
+                                    "file":  "ballot.5.0.wav",
+                                    "durationMs":  1987
+                                },
+                 "ballot.5.1":  {
+                                    "text":  "五号投给一号。",
+                                    "file":  "ballot.5.1.wav",
+                                    "durationMs":  2463
+                                },
+                 "ballot.5.2":  {
+                                    "text":  "五号投给二号。",
+                                    "file":  "ballot.5.2.wav",
+                                    "durationMs":  2480
+                                },
+                 "ballot.5.3":  {
+                                    "text":  "五号投给三号。",
+                                    "file":  "ballot.5.3.wav",
+                                    "durationMs":  2541
+                                },
+                 "ballot.5.4":  {
+                                    "text":  "五号投给四号。",
+                                    "file":  "ballot.5.4.wav",
+                                    "durationMs":  2516
+                                },
+                 "ballot.5.5":  {
+                                    "text":  "五号投给五号。",
+                                    "file":  "ballot.5.5.wav",
+                                    "durationMs":  2462
+                                },
+                 "ballot.5.6":  {
+                                    "text":  "五号投给六号。",
+                                    "file":  "ballot.5.6.wav",
+                                    "durationMs":  2495
+                                },
+                 "speaker.6":  {
+                                   "text":  "六号玩家，请开始竞选发言。",
+                                   "file":  "speaker.6.wav",
+                                   "durationMs":  4438
+                               },
+                 "seat.6":  {
+                                "text":  "六号。",
+                                "file":  "seat.6.wav",
+                                "durationMs":  1549
+                            },
+                 "elected.6":  {
+                                   "text":  "六号当选警长。",
+                                   "file":  "elected.6.wav",
+                                   "durationMs":  2618
+                               },
+                 "withdrawn.6":  {
+                                     "text":  "六号退水。",
+                                     "file":  "withdrawn.6.wav",
+                                     "durationMs":  2125
+                                 },
+                 "exploded.6":  {
+                                    "text":  "六号发动自爆。",
+                                    "file":  "exploded.6.wav",
+                                    "durationMs":  2469
+                                },
+                 "eliminated.6":  {
+                                      "text":  "六号完全出局。",
+                                      "file":  "eliminated.6.wav",
+                                      "durationMs":  2661
+                                  },
+                 "exiled.6":  {
+                                  "text":  "六号被放逐，失去一张身份。",
+                                  "file":  "exiled.6.wav",
+                                  "durationMs":  4247
+                              },
+                 "transfer.6":  {
+                                    "text":  "警徽移交给六号。",
+                                    "file":  "transfer.6.wav",
+                                    "durationMs":  2824
+                                },
+                 "ballot.6.0":  {
+                                    "text":  "六号弃票。",
+                                    "file":  "ballot.6.0.wav",
+                                    "durationMs":  2033
+                                },
+                 "ballot.6.1":  {
+                                    "text":  "六号投给一号。",
+                                    "file":  "ballot.6.1.wav",
+                                    "durationMs":  2518
+                                },
+                 "ballot.6.2":  {
+                                    "text":  "六号投给二号。",
+                                    "file":  "ballot.6.2.wav",
+                                    "durationMs":  2536
+                                },
+                 "ballot.6.3":  {
+                                    "text":  "六号投给三号。",
+                                    "file":  "ballot.6.3.wav",
+                                    "durationMs":  2604
+                                },
+                 "ballot.6.4":  {
+                                    "text":  "六号投给四号。",
+                                    "file":  "ballot.6.4.wav",
+                                    "durationMs":  2576
+                                },
+                 "ballot.6.5":  {
+                                    "text":  "六号投给五号。",
+                                    "file":  "ballot.6.5.wav",
+                                    "durationMs":  2515
+                                },
+                 "ballot.6.6":  {
+                                    "text":  "六号投给六号。",
+                                    "file":  "ballot.6.6.wav",
+                                    "durationMs":  2555
+                                },
+                 "count.1":  {
+                                 "text":  "一",
+                                 "file":  "count.1.wav",
+                                 "durationMs":  1261
+                             },
+                 "count.2":  {
+                                 "text":  "二",
+                                 "file":  "count.2.wav",
+                                 "durationMs":  1256
+                             },
+                 "count.3":  {
+                                 "text":  "三",
+                                 "file":  "count.3.wav",
+                                 "durationMs":  1352
+                             },
+                 "count.4":  {
+                                 "text":  "四",
+                                 "file":  "count.4.wav",
+                                 "durationMs":  1329
+                             },
+                 "count.5":  {
+                                 "text":  "五",
+                                 "file":  "count.5.wav",
+                                 "durationMs":  1344
+                             }
+             }
+}
