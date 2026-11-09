@@ -1,8 +1,8 @@
 {
   "name": "double-identity-werewolf-lan",
   "private": true,
-  "version": "0.3.0",
-  "description": "双身份狼人杀：局域网房主控制台、独立玩家、测试 Bot 与可玩测试对局",
+  "version": "1.0.0",
+  "description": "六人双身份狼人杀：局域网联机、独立房主、语音主持与手动阶段控制",
   "scripts": {
     "start": "node server.js",
     "test": "node --test test/*.test.js"

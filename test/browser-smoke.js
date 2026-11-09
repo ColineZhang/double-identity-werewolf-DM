@@ -7,34 +7,34 @@ const {tmpdir}=require('node:os');
 const {spawn}=require('node:child_process');
 const assert=require('node:assert/strict');
 const {once}=require('node:events');
-const {makeRoom}=require('./helpers');
+const {makeRoom,openWindow}=require('./helpers');
 const game=require('../lib/game');
 const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const dir=fs.mkdtempSync(path.join(tmpdir(),'werewolf-browser-'));
 const profile=path.join(dir,'profile');
 process.env.DATA_FILE=path.join(dir,'rooms.json');
 function fixture(code){
- const room=makeRoom();room.testMode=true;room.code=code;room.host={id:'host',sid:code.padEnd(64,'a'),lastSeen:Date.now()};
+ const room=makeRoom();room.code=code;room.host={id:'host',sid:code.padEnd(64,'a'),lastSeen:Date.now()};
  room.players.forEach((p,i)=>{p.sid=(code+i).padEnd(64,'b');p.lastSeen=Date.now();});
  game.createGame(room);return room;
 }
-const seer=fixture('999991');seer.game.step=3;game.initStep(seer);
-const election=fixture('999992');election.players.slice(1).forEach(p=>p.bot=true);
+const seer=fixture('999991');seer.game.step=3;game.initStep(seer);openWindow(seer);
+const election=fixture('999992');
 while(election.game.phase==='NIGHT')game.advance(election);
 election.game.election.signups={p1:true,p2:false,p3:false,p4:false,p5:false};
 election.game.election.deadline=Date.now()+120000;
 const witch=fixture('999993');witch.players[0].hand.cards[0].effectiveRole='VILLAGER';witch.players[0].hand.cards[0].printedRole='VILLAGER';witch.players[0].hand.cards[0].status='LOST';witch.players[0].hand.cards[1].effectiveRole='WITCH';witch.players[0].hand.cards[1].printedRole='WITCH';witch.players[0].hand.cards[1].status='ACTIVE';game.createGame(witch);
-witch.game.night=2;witch.game.day=1;witch.game.step=1;game.initStep(witch);game.submitAction(witch,witch.players[2],{type:'TARGET',seat:1});game.advance(witch);
+witch.game.night=2;witch.game.day=1;witch.game.step=1;game.initStep(witch);game.submitAction(witch,witch.players[2],{type:'TARGET',seat:1});game.advance(witch);openWindow(witch);
 const farewell=fixture('999994');farewell.players[1].hand.cards[0].status='LOST';farewell.players[1].hand.cards[1].status='ACTIVE';
 farewell.game.phase='VOTE';farewell.game.day=1;farewell.game.sheriff='p0';game.initStep(farewell);
 game.submitAction(farewell,farewell.players[0],{type:'VOTE',seat:2});game.advance(farewell,farewell.game.voteDeadline);
-const completed=fixture('999995');completed.testMode=false;
+const completed=fixture('999995');
 game.advance(completed);game.advance(completed);game.submitAction(completed,completed.players[3],{type:'POISON',seat:5});
 while(completed.game.phase==='NIGHT')game.advance(completed);
 game.advance(completed,completed.game.election.deadline);game.advance(completed);
 game.submitAction(completed,completed.players[0],{type:'VOTE',seat:5});game.advance(completed,completed.game.voteDeadline);game.advance(completed);
 assert.equal(completed.status,'FINISHED');
-const discussion=fixture('999996');discussion.testMode=false;
+const discussion=fixture('999996');
 while(discussion.game.phase==='NIGHT')game.advance(discussion);
 game.advance(discussion,discussion.game.election.deadline);
 fs.writeFileSync(process.env.DATA_FILE,JSON.stringify({rooms:{[seer.code]:seer,[election.code]:election,[witch.code]:witch,[farewell.code]:farewell,[completed.code]:completed,[discussion.code]:discussion}}));
@@ -95,7 +95,7 @@ async function main(){
  await waitFor(player,'document.querySelector(".inspection-result")?.textContent.includes("狼人")');
  assert.equal(await evaluate(host,'document.body.textContent.includes("你的查验记录")'),false);
  assert.equal(await evaluate(other,'document.body.textContent.includes("你的查验记录")'),false);
- await evaluate(host,'document.querySelector("[data-action=test-skip][data-mode=PHASE]").click()');
+ await evaluate(host,'document.querySelector("[data-action=skip][data-mode=PHASE]").click()');
  await waitFor(player,'data.room.game.phase==="SHERIFF"');
  assert.equal(await evaluate(player,'document.querySelector(".inspection-result").textContent.includes("狼人")'),true);
  await send('Page.reload',{},player);
@@ -146,7 +146,7 @@ async function main(){
  assert.equal(await evaluate(witchPhone,'document.querySelector("#targetSelect").options.length'),7);
  await evaluate(witchPhone,'document.querySelector("#targetSelect").value="1";document.querySelector("#targetSelect").dispatchEvent(new Event("change",{bubbles:true}));document.querySelector("[data-action=submit]").click()');
  await waitFor(witchPhone,'data.self.action.submitted');
- await evaluate(witchHost,'document.querySelector("[data-action=test-skip][data-mode=DAWN]").click()');
+ await evaluate(witchHost,'document.querySelector("[data-action=skip][data-mode=DAWN]").click()');
  await waitFor(witchPhone,'data.room.game.phase==="DISCUSSION"');
  assert.equal(await evaluate(witchPhone,'data.self.cards[1].status'), 'ACTIVE');
  assert.equal(await evaluate(witchPhone,'data.room.game.events.includes("昨夜平安夜")'),true);
@@ -179,7 +179,7 @@ async function main(){
   assert.equal(await evaluate(endPage,'document.documentElement.scrollWidth <= innerWidth'),true);
  }
  assert.deepEqual(errors,[]);
- console.log(JSON.stringify({ok:true,checks:['seer click -> private result','result survives test skip and reload','host and other player privacy','mobile signup -> speech -> withdrawal','10-second countdown -> sheriff result -> automatic dawn announcement','host WAV playback -> pause -> replay -> resume -> disable; player stays silent','mobile identity drawer open/close/reload','second witch sees knife -> saves self -> test skip dawn -> survives'],screenshots:[path.join(dir,'seer-mobile.png'),path.join(dir,'election-mobile.png')]}));
+ console.log(JSON.stringify({ok:true,checks:['seer click -> private result','result survives host skip and reload','host and other player privacy','mobile signup -> speech -> withdrawal','10-second countdown -> sheriff result -> automatic dawn announcement','host WAV playback -> pause -> replay -> resume -> disable; player stays silent','mobile identity drawer open/close/reload','second witch sees knife -> saves self -> host skip dawn -> survives'],screenshots:[path.join(dir,'seer-mobile.png'),path.join(dir,'election-mobile.png')]}));
  await send('Browser.close').catch(()=>{});
 }
 main().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{

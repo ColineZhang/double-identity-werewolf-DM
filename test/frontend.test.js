@@ -11,7 +11,7 @@ function boot(){
  const context=vm.createContext({document,location:{search:'',pathname:'/'},URLSearchParams,localStorage:{getItem(){return null;},setItem(){}},history:{replaceState(){}},setInterval(){},window:{addEventListener(){}},EventSource:class{},navigator:{},confirm(){return true}});
  vm.runInContext(source,context);return {context,app,run:code=>vm.runInContext(code,context)};
 }
-const players=Array.from({length:6},(_,i)=>({id:`p${i}`,seat:i+1,name:i?'测试 Bot '+(i+1):'真人',bot:i>0,online:true,locked:true,eliminated:false}));
+const players=Array.from({length:6},(_,i)=>({id:`p${i}`,seat:i+1,name:'玩家 '+(i+1),online:true,locked:true,eliminated:false}));
 const game={phase:'NIGHT',title:'第 1 夜 · 守卫',night:1,day:0,step:0,sheriff:null,winner:null,events:[]};
 
 test('skill and vote target options include escaped nicknames and retain numeric submitted values',()=>{
@@ -51,17 +51,13 @@ test('public seat cards display two identities, one identity and eliminated on h
  }
 });
 
-test('Bot actions render test-only targets, passes, registration and inspection feedback',()=>{
+test('legacy debug payload cannot render any Bot controls or private hands',()=>{
  const {app,run}=boot();
- const view={joined:true,room:{code:'123456',status:'GAME',testMode:true,players,game,debugBotActions:[
-  {seat:2,night:1,phase:'SEER',type:'TARGET',target:3,result:'狼人'},
-  {seat:4,night:1,phase:'WITCH',type:'PASS',target:null},
-  {seat:3,day:1,phase:'SHERIFF_SIGNUP',type:'SIGNUP',run:false},
- ]},self:{isHost:true}};
+ const view={joined:true,room:{code:'123456',status:'GAME',testMode:true,players,game,debugBotHands:[{seat:2,cards:[{effectiveLabel:'秘密身份'}]}],debugBotActions:[{seat:2,phase:'SEER',result:'秘密查验'}]},self:{isHost:true}};
  run(`applyState(${JSON.stringify(view)});render(true)`);
- assert.match(app.innerHTML,/查验3号，结果：狼人/);assert.match(app.innerHTML,/不发动技能/);assert.match(app.innerHTML,/不上警/);
- view.room.testMode=false;run(`applyState(${JSON.stringify(view)});render(true)`);assert.doesNotMatch(app.innerHTML,/Bot 行动记录|查验3号/);
+ assert.doesNotMatch(app.innerHTML,/Bot|测试模式|秘密身份|秘密查验|create-test|test-mode/);
 });
+
 test('private identity drawer defaults closed, shows both states, closes on refresh, and is absent for host',()=>{
  const {app,run}=boot();
  const view={joined:true,room:{code:'123456',status:'GAME',players,playerCount:6,game:{...game,phase:'DISCUSSION'}},self:{isHost:false,id:'p0',seat:1,locked:true,cards:[{order:0,printedLabel:'村民',effectiveLabel:'村民',status:'LOST'},{order:1,printedLabel:'女巫',effectiveLabel:'女巫',status:'ACTIVE'}]}};
@@ -77,25 +73,27 @@ test('witch UI separates spirit targets from medicine and permits any target inc
  view.self.action.spiritTargets=[];run(`applyState(${JSON.stringify(view)});render(true)`);assert.match(app.innerHTML,/没有指杀选择目标/);assert.match(app.innerHTML,/使用解药/);
  view.self.action.usedSave=true;view.self.action.canSave=false;delete view.self.action.spiritTargets;run(`applyState(${JSON.stringify(view)});render(true)`);assert.doesNotMatch(app.innerHTML,/使用解药/);assert.match(app.innerHTML,/使用毒药/);
 });
-test('test controls belong to host; Bot hands are displayed only in test mode',()=>{
- const {app,run}=boot();const view={joined:true,room:{code:'123456',status:'GAME',testMode:true,players,playerCount:6,game,debugBotHands:[{seat:2,name:'Bot',cards:[{order:0,printedRole:'COPYCAT',printedLabel:'复制人',effectiveLabel:'守卫',status:'ACTIVE'}]}]},self:{isHost:true}};
- run(`applyState(${JSON.stringify(view)});render(true)`);assert.match(app.innerHTML,/直接到天亮/);assert.match(app.innerHTML,/复制人 → 守卫/);
- view.self={isHost:false,id:'p0',seat:1,cards:[]};run(`applyState(${JSON.stringify(view)});render(true)`);assert.doesNotMatch(app.innerHTML,/data-action="test-skip"/);assert.match(app.innerHTML,/复制人 → 守卫/);
- view.room.testMode=false;delete view.room.debugBotHands;run(`applyState(${JSON.stringify(view)});render(true)`);assert.doesNotMatch(app.innerHTML,/复制人 → 守卫|data-action="test-skip"/);
+test('host skip controls are always available in game and absent for players or after finish',()=>{
+ const {app,run}=boot();const view={joined:true,room:{code:'123456',status:'GAME',players,playerCount:6,game},self:{isHost:true}};
+ run(`applyState(${JSON.stringify(view)});render(true)`);assert.match(app.innerHTML,/data-action="skip"/);assert.match(app.innerHTML,/直接到天亮/);
+ view.self={isHost:false,id:'p0',seat:1,cards:[]};run(`applyState(${JSON.stringify(view)});render(true)`);assert.doesNotMatch(app.innerHTML,/data-action="skip"/);
+ view.self={isHost:true};view.room.status='FINISHED';view.room.game={...game,phase:'FINISHED',winner:'WOLF'};
+ run(`applyState(${JSON.stringify(view)});render(true)`);assert.doesNotMatch(app.innerHTML,/data-action="skip"/);
 });
-test('frontend render: host separate from player; bots; ordering; actions; result',()=>{
+
+test('frontend render: host separate from six players; ordering; actions; result',()=>{
  const {app,run}=boot();
- run('data={joined:false}');run('render(true)');assert.match(app.innerHTML,/创建六人房间/);
- run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'LOBBY',capacity:6,playerCount:6,botCount:5,players},self:{isHost:true,name:'房主'}})}`);
- run('render(true)');assert.match(app.innerHTML,/Bot 补满六人/);assert.match(app.innerHTML,/房主控制台/);assert.doesNotMatch(app.innerHTML,/房主也是玩家/);
- run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'ORDERING',capacity:6,playerCount:6,botCount:5,players},self:{isHost:false,id:'p0',name:'真人',seat:1,team:'VILLAGE',locked:false,cards:[{id:'a',printedRole:'SEER',effectiveRole:'SEER',printedLabel:'预言家',effectiveLabel:'预言家',status:'UNORDERED'},{id:'b',printedRole:'VILLAGER',effectiveRole:'VILLAGER',printedLabel:'村民',effectiveLabel:'村民',status:'UNORDERED'}]}})}`);
+ run('data={joined:false}');run('render(true)');assert.match(app.innerHTML,/创建六人房间/);assert.doesNotMatch(app.innerHTML,/Bot|测试模式|测试版|create-test/);
+ run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'LOBBY',capacity:6,playerCount:6,players},self:{isHost:true,name:'房主'}})}`);
+ run('render(true)');assert.doesNotMatch(app.innerHTML,/Bot|测试模式|测试对局/);assert.match(app.innerHTML,/房主控制台/);assert.doesNotMatch(app.innerHTML,/房主也是玩家/);
+ run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'ORDERING',capacity:6,playerCount:6,players},self:{isHost:false,id:'p0',name:'真人',seat:1,team:'VILLAGE',locked:false,cards:[{id:'a',printedRole:'SEER',effectiveRole:'SEER',printedLabel:'预言家',effectiveLabel:'预言家',status:'UNORDERED'},{id:'b',printedRole:'VILLAGER',effectiveRole:'VILLAGER',printedLabel:'村民',effectiveLabel:'村民',status:'UNORDERED'}]}})}`);
  run('render(true)');assert.match(app.innerHTML,/确认牌序/);assert.match(app.innerHTML,/预言家/);
- run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'GAME',capacity:6,playerCount:6,botCount:5,players,game},self:{isHost:false,id:'p0',name:'真人',seat:1,activeRole:'GUARD',cards:[{id:'a',effectiveLabel:'守卫',status:'ACTIVE'}],action:{step:'GUARD',targets:[1,2,3],submitted:false}}})}`);
+ run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'GAME',capacity:6,playerCount:6,players,game},self:{isHost:false,id:'p0',name:'真人',seat:1,activeRole:'GUARD',cards:[{id:'a',effectiveLabel:'守卫',status:'ACTIVE'}],action:{step:'GUARD',targets:[1,2,3],submitted:false}}})}`);
  run('render(true)');assert.match(app.innerHTML,/确认操作/);
- run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'GAME',capacity:6,playerCount:6,botCount:5,players,game},self:{isHost:true,name:'房主'}})}`);
+ run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'GAME',capacity:6,playerCount:6,players,game},self:{isHost:true,name:'房主'}})}`);
  run('render(true)');assert.match(app.innerHTML,/夜间按固定时间自动推进/);assert.doesNotMatch(app.innerHTML,/你查验了/);
  const final={...game,phase:'FINISHED',winner:'WOLF',reveal:[{seat:1,name:'真人',cards:[{role:'村民',status:'LOST'}]}]};
- run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'FINISHED',capacity:6,playerCount:6,botCount:5,players,game:final},self:{isHost:true,name:'房主'}})}`);
+ run(`data=${JSON.stringify({joined:true,room:{code:'123456',status:'FINISHED',capacity:6,playerCount:6,players,game:final},self:{isHost:true,name:'房主'}})}`);
  run('render(true)');assert.match(app.innerHTML,/狼人获胜/);assert.match(app.innerHTML,/身份复盘/);
 });
 

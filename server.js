@@ -11,13 +11,12 @@ const { SEATS, deal, lockOrder, publicCard } = require('./lib/rules');
 const game = require('./lib/game');
 const sheriff = require('./lib/sheriff');
 const narrator = require('./lib/narrator');
-const botDebug = require('./lib/bot-debug');
 const recap = require('./lib/recap');
 const speaking = require('./lib/speaking');
 
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
-const DB = process.env.DATA_FILE || path.join(__dirname,'data','rooms.json');
+const DB = process.env.DATA_FILE || path.join(__dirname,'data','rooms.production.json');
 const PUBLIC = path.join(__dirname,'public');
 const MAX_ROOMS=100;
 const sessions=new Map(), connections=new Set();
@@ -27,6 +26,9 @@ catch(e){console.error('无法读取房间存档',e);process.exit(1);}
 if(!db.rooms||typeof db.rooms!=='object')throw Error('房间存档格式错误');
 // Old v0.2 rooms had a host occupying seat 1. This version uses a separate host session.
 for(const room of Object.values(db.rooms)){
+  // Do not revive debug rooms if an old store is explicitly supplied.
+  if(room.testMode===true||room.players.some(p=>p.bot)){delete db.rooms[room.code];continue;}
+  delete room.testMode;
   if(!room.host){
     const old=room.players.find(p=>p.isHost);
     if(old){room.host={id:old.id,sid:old.sid,name:'房主',lastSeen:old.lastSeen};room.players=room.players.filter(p=>p!==old);}
@@ -35,7 +37,7 @@ for(const room of Object.values(db.rooms)){
     room.status='LOBBY';room.game=null;room.players.forEach(p=>{p.hand=null;});
   }
   sessions.set(room.host.sid,{code:room.code,role:'host'});
-  for(const p of room.players.filter(p=>!p.bot))sessions.set(p.sid,{code:room.code,role:'player',playerId:p.id});
+  for(const p of room.players)sessions.set(p.sid,{code:room.code,role:'player',playerId:p.id});
   game.upgrade(room);
   narrator.restore(room);
 }
@@ -47,7 +49,7 @@ function auth(req){
   const sid=getSid(req), ref=sid&&sessions.get(sid), room=ref&&db.rooms[ref.code];
   if(!room)return null;
   if(ref.role==='host' && room.host.sid===sid)return{room,sid,host:true,player:null};
-  const player=room.players.find(p=>!p.bot&&p.sid===sid&&p.id===ref.playerId);
+  const player=room.players.find(p=>p.sid===sid&&p.id===ref.playerId);
   return player?{room,sid,host:false,player}:null;
 }
 function send(res,status,data){res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(data));}
@@ -66,12 +68,11 @@ function tickRoom(room,now=Date.now()){
 function normalizeName(name){if(typeof name!=='string')fail(400,'请输入昵称');const n=name.trim().replace(/\s+/g,' ');if(n.length<1||n.length>16||/[\x00-\x1f\x7f]/.test(n))fail(400,'昵称需为1到16个字符');return n;}
 function roomView(ctx){
  const {room,player}=ctx,g=room.game;
- return {joined:true,room:{code:room.code,status:room.status,testMode:room.testMode===true,capacity:SEATS,playerCount:room.players.length,narration:narrator.view(room),
-  ...(room.testMode===true?{debugBotActions:botDebug.view(room),debugBotHands:room.players.filter(p=>p.bot===true&&p.hand?.locked).map(p=>({seat:p.seat,name:p.name,cards:game.visibleCards(room,p).slice().sort((a,b)=>a.order-b.order).map(publicCard)}))}:{}),
-  botCount:room.players.filter(p=>p.bot).length,readyCount:room.players.filter(p=>p.hand?.locked).length,
-  ruleset:'2023 六人双身份 · 测试模式',hostOnline:Date.now()-(room.host.lastSeen||0)<40000,
-  players:room.players.slice().sort((a,b)=>a.seat-b.seat).map(p=>({id:p.id,seat:p.seat,name:p.name,bot:Boolean(p.bot),online:p.bot||Date.now()-(p.lastSeen||0)<40000,locked:Boolean(p.hand?.locked),remainingCards:p.hand?game.visibleCards(room,p).filter(c=>c.status!=='LOST').length:null,eliminated:!!(g&&!game.publiclyAlive(room,p))})),
-  game:g?{id:g.id,phase:g.phase,title:game.phaseTitle(g),night:g.night,day:g.day,step:g.step,stepKey:g.stepKey,serverNow:Date.now(),sheriff:room.players.find(p=>p.id===g.sheriff)?.seat||null,winner:g.winner,events:g.events.slice(-30),voteResults:g.voteResults||[],...(g.phase==='LAST_WORDS'?{lastWordsSeat:g.lastWordsSeat}:{}),...(g.phase==='VOTE'?{voteDeadline:g.voteDeadline}:{}),dawnResults:g.dawnResults||[],...(room.testMode===true?{testEvents:g.testCommands||[]}:{}),...(g.phase==='SHERIFF'?{election:sheriff.publicView(room)}:{}),...(g.phase==='BADGE'?{badgeDeadline:g.badgeDeadline}:{}),...(g.phase==='DISCUSSION'&&!g.sheriff&&g.discussionSpeaking?.day===g.day?{speaking:speaking.view(g.discussionSpeaking,room.players.filter(game.alive))}:{}),...recap.view(room)}:null},
+ return {joined:true,room:{code:room.code,status:room.status,capacity:SEATS,playerCount:room.players.length,narration:narrator.view(room),
+  readyCount:room.players.filter(p=>p.hand?.locked).length,
+  ruleset:'六人双身份 · 调整版',hostOnline:Date.now()-(room.host.lastSeen||0)<40000,
+  players:room.players.slice().sort((a,b)=>a.seat-b.seat).map(p=>({id:p.id,seat:p.seat,name:p.name,online:Date.now()-(p.lastSeen||0)<40000,locked:Boolean(p.hand?.locked),remainingCards:p.hand?game.visibleCards(room,p).filter(c=>c.status!=='LOST').length:null,eliminated:!!(g&&!game.publiclyAlive(room,p))})),
+  game:g?{id:g.id,phase:g.phase,title:game.phaseTitle(g),night:g.night,day:g.day,step:g.step,stepKey:g.stepKey,serverNow:Date.now(),sheriff:room.players.find(p=>p.id===g.sheriff)?.seat||null,winner:g.winner,events:g.events.slice(-30),voteResults:g.voteResults||[],...(g.phase==='LAST_WORDS'?{lastWordsSeat:g.lastWordsSeat}:{}),...(g.phase==='VOTE'?{voteDeadline:g.voteDeadline}:{}),dawnResults:g.dawnResults||[],...(g.phase==='SHERIFF'?{election:sheriff.publicView(room)}:{}),...(g.phase==='BADGE'?{badgeDeadline:g.badgeDeadline}:{}),...(g.phase==='DISCUSSION'&&!g.sheriff&&g.discussionSpeaking?.day===g.day?{speaking:speaking.view(g.discussionSpeaking,room.players.filter(game.alive))}:{}),...recap.view(room)}:null},
   self:ctx.host?{isHost:true,name:room.host.name}:{isHost:false,id:player.id,seat:player.seat,name:player.name,locked:Boolean(player.hand?.locked),
    ...(room.status!=='LOBBY'&&player.hand?{cards:game.visibleCards(room,player).map(publicCard),team:player.hand.team,golden:player.hand.golden}:{}),
    ...(g?{activeRole:game.visibleCards(room,player).find(c=>c.status==='ACTIVE')?.effectiveRole||null,action:narrator.windowOpen(room)?game.selfActionView(room,player):null,canExplode:narrator.windowOpen(room)&&game.canExplode(room,player),...(g.phase==='SHERIFF'?{election:sheriff.selfView(room,player)}:{}),...(g.phase==='NIGHT'&&g.step===1&&game.wolves(room).some(p=>p.id===player.id)?{wolfTeammates:game.wolves(room).map(p=>p.seat)}:{}),inspections:game.inspections(player).map(({night,seat,team,basis})=>({night,seat,team,basis:basis||'CURRENT'}))}:{})}
@@ -81,8 +82,7 @@ function ips(){const set=new Set();for(const nics of Object.values(os.networkInt
 function code(){for(let i=0;i<40;i++){const v=String(randomInt(100000,1000000));if(!db.rooms[v])return v;}fail(503,'无法生成房间号');}
 function nextSeat(room){for(let n=1;n<=SEATS;n++)if(!room.players.some(p=>p.seat===n))return n;return null;}
 function noSession(req){if(auth(req))fail(409,'你已处于房间中，请先退出');}
-function newHuman(name,seat){return{id:randomBytes(12).toString('hex'),sid:randomBytes(32).toString('hex'),name,seat,bot:false,lastSeen:Date.now(),hand:null};}
-function newBot(seat){return{id:randomBytes(12).toString('hex'),name:`测试 Bot ${seat}`,seat,bot:true,lastSeen:Date.now(),hand:null};}
+function newHuman(name,seat){return{id:randomBytes(12).toString('hex'),sid:randomBytes(32).toString('hex'),name,seat,lastSeen:Date.now(),hand:null};}
 async function bodyOf(req){const parts=[];let n=0;for await(const chunk of req){n+=chunk.length;if(n>8192)fail(413,'请求过大');parts.push(chunk);}let o;try{o=JSON.parse(Buffer.concat(parts).toString('utf8'));}catch{fail(400,'JSON格式错误');}if(!o||typeof o!=='object'||Array.isArray(o))fail(400,'参数格式错误');return o;}
 function svgQr(str){const qr=new QRCode(-1,QRLevel.M);qr.addData(str);qr.make();const n=qr.getModuleCount(),size=n+8,r=[];for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(qr.isDark(y,x))r.push(`<rect x="${x+4}" y="${y+4}" width="1" height="1"/>`);return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" shape-rendering="crispEdges"><rect width="${size}" height="${size}" fill="white"/><g fill="#132033">${r.join('')}</g></svg>`;}
 const STATIC={'/':['index.html','text/html; charset=utf-8'],'/index.html':['index.html','text/html; charset=utf-8'],'/app.js':['app.js','text/javascript; charset=utf-8'],'/voice.js':['voice.js','text/javascript; charset=utf-8'],'/styles.css':['styles.css','text/css; charset=utf-8'],'/favicon.svg':['favicon.svg','image/svg+xml']};
@@ -119,8 +119,8 @@ const handler=async(req,res)=>{
   if(pathname==='/api/create'){
     noSession(req);if(Object.keys(db.rooms).length>=MAX_ROOMS)fail(503,'房间数已达上限');
     const host={id:randomBytes(12).toString('hex'),sid:randomBytes(32).toString('hex'),name:'房主控制台',lastSeen:Date.now()};
-    if(body.testMode!==undefined&&typeof body.testMode!=='boolean')fail(400,'测试模式参数无效');
-    const room={code:code(),testMode:body.testMode===true,status:'LOBBY',host,players:[],game:null,createdAt:new Date().toISOString()};
+    if(Object.hasOwn(body,'testMode'))fail(400,'此版本仅支持正式房间');
+    const room={code:code(),status:'LOBBY',host,players:[],game:null,createdAt:new Date().toISOString()};
     db.rooms[room.code]=room;sessions.set(host.sid,{code:room.code,role:'host'});sessionCookie(res,host.sid);publish(room);return send(res,200,{ok:true,code:room.code});
   }
   if(pathname==='/api/join'){
@@ -132,13 +132,9 @@ const handler=async(req,res)=>{
   }
   const ctx=requireAuth(req),{room,player}=ctx;
   if(tickRoom(room))publish(room);
-  if(pathname==='/api/test-mode'){
-    requireHost(ctx);requireStage(ctx,'LOBBY');if(typeof body.enabled!=='boolean')fail(400,'测试模式参数无效');
-    room.testMode=body.enabled;publish(room);return send(res,200,{ok:true});
-  }
-  if(pathname==='/api/test-skip'){
+  if(pathname==='/api/skip'){
     requireHost(ctx);
-    try{const changed=game.testSkip(room,body);if(changed)publish(room);return send(res,200,{ok:true,changed});}
+    try{const changed=game.hostSkip(room,body);if(changed)publish(room);return send(res,200,{ok:true,changed});}
     catch(e){fail(409,e.message);}
   }
   if(pathname==='/api/narration'){
@@ -156,26 +152,18 @@ const handler=async(req,res)=>{
   }
   if(pathname==='/api/leave'){
     requireStage(ctx,'LOBBY');
-    if(ctx.host){for(const p of room.players.filter(p=>!p.bot))sessions.delete(p.sid);sessions.delete(room.host.sid);delete db.rooms[room.code];}
+    if(ctx.host){for(const p of room.players)sessions.delete(p.sid);sessions.delete(room.host.sid);delete db.rooms[room.code];}
     else{room.players=room.players.filter(p=>p.id!==player.id);sessions.delete(player.sid);}
     clearCookie(res);publish(room);return send(res,200,{ok:true});
   }
-  if(pathname==='/api/bots'){
-    requireHost(ctx);requireStage(ctx,'LOBBY');const action=body.action;
-    if(action==='fill'){while(room.players.length<SEATS){const seat=nextSeat(room);room.players.push(newBot(seat));}}
-    else if(action==='add'){const seat=nextSeat(room);if(!seat)fail(409,'座位已满');room.players.push(newBot(seat));}
-    else if(action==='clear'){room.players=room.players.filter(p=>!p.bot);}
-    else fail(400,'Bot 操作无效');
-    publish(room);return send(res,200,{ok:true});
-  }
   if(pathname==='/api/remove'){
     requireHost(ctx);requireStage(ctx,'LOBBY');const p=room.players.find(x=>x.id===body.playerId);if(!p)fail(404,'找不到玩家');
-    room.players=room.players.filter(x=>x.id!==p.id);if(!p.bot)sessions.delete(p.sid);publish(room);return send(res,200,{ok:true});
+    room.players=room.players.filter(x=>x.id!==p.id);sessions.delete(p.sid);publish(room);return send(res,200,{ok:true});
   }
   if(pathname==='/api/start'){
-    requireHost(ctx);requireStage(ctx,'LOBBY');if(room.players.length!==SEATS)fail(409,'需要六名玩家或 Bot');
+    requireHost(ctx);requireStage(ctx,'LOBBY');if(room.players.length!==SEATS)fail(409,'需要六名玩家');
     const hands=deal(),ps=room.players.slice().sort((a,b)=>a.seat-b.seat);
-    ps.forEach((p,i)=>{p.hand=hands[i];p.lastInspection=null;p.inspections=[];if(p.bot){const acceptable=p.hand.cards.find(c=>!(p.hand.team==='WOLF'&&c.effectiveRole==='WITCH'));p.hand=lockOrder(p.hand,acceptable.id);}});
+    ps.forEach((p,i)=>{p.hand=hands[i];p.lastInspection=null;p.inspections=[];});
     room.status=ps.every(p=>p.hand.locked)?'READY':'ORDERING';publish(room);return send(res,200,{ok:true});
   }
   if(pathname==='/api/lock'){
@@ -193,7 +181,7 @@ const handler=async(req,res)=>{
     try{game.submitAction(room,player,body);}catch(e){fail(409,e.message);}publish(room);return send(res,200,{ok:true});
   }
   if(pathname==='/api/advance'){
-    requireHost(ctx);requireStage(ctx,'GAME');if(room.narration?.enabled&&room.narration.paused)fail(409,'请先恢复语音主持');if(room.game.phase==='NIGHT')fail(409,'夜间自动推进；测试房主请使用测试跳过控制');if(body.stepKey&&body.stepKey!==room.game.stepKey)fail(409,'阶段已经改变，请刷新后重新操作');try{game.advance(room);}catch(e){fail(409,e.message);}publish(room);return send(res,200,{ok:true});
+    requireHost(ctx);requireStage(ctx,'GAME');if(room.narration?.enabled&&room.narration.paused)fail(409,'请先恢复语音主持');if(room.game.phase==='NIGHT')fail(409,'夜间自动推进；如需提前结束，请使用房主跳过控制');if(body.stepKey&&body.stepKey!==room.game.stepKey)fail(409,'阶段已经改变，请刷新后重新操作');try{game.advance(room);}catch(e){fail(409,e.message);}publish(room);return send(res,200,{ok:true});
   }
   if(pathname==='/api/restart'){
     requireHost(ctx);if(room.status==='LOBBY')fail(409,'尚未发牌');room.status='LOBBY';room.game=null;
@@ -215,7 +203,7 @@ server.on('listening',()=>{
 });
 server.on('close',()=>clearInterval(phaseTimer));
 if(require.main===module)server.listen(PORT,HOST,()=>{
- console.log('\n双身份狼人杀 · 六人局域网测试版\n');console.log(`房主电脑：http://localhost:${PORT}`);
+ console.log('\n双身份狼人杀 · 六人局域网版\n');console.log(`房主电脑：http://localhost:${PORT}`);
  const all=ips();for(const ip of all)console.log(`手机加入：http://${ip}:${PORT}`);
  if(!all.length)console.log('未检测到局域网地址');console.log('\n电脑和手机连接同一 Wi-Fi，按 Ctrl+C 停止。\n');
 });

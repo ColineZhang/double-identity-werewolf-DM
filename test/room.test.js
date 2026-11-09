@@ -17,73 +17,59 @@ async function request(route,options={},cookie=''){
 const post=(url,body={},cookie='')=>request(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)},cookie);
 const state=cookie=>request('/api/state',{},cookie);
 
-test('independent host + phone join + five bots + lock -> interactive game -> outcome',async t=>{
-  await new Promise(done=>server.listen(0,'127.0.0.1',done));base=`http://127.0.0.1:${server.address().port}`;
-  t.after(async()=>{await new Promise(resolve=>server.close(resolve));rmSync(dir,{recursive:true,force:true});});
-  const host=await post('/api/create',{testMode:true});assert.equal(host.status,200);
-  const code=host.body.code;
-  const initial=(await state(host.cookie)).body;
-  assert.equal(initial.self.isHost,true);
-  assert.equal(initial.self.seat,undefined);
-  assert.equal(initial.room.playerCount,0);
-  const phone=await post('/api/join',{code,name:'手机测试玩家'});assert.equal(phone.status,200);
-  const me=(await state(phone.cookie)).body;
-  assert.equal(me.self.seat,1);
-  assert.equal(me.self.isHost,false);
-  assert.equal((await post('/api/bots',{action:'add'},phone.cookie)).status,403);
-  assert.equal((await post('/api/bots',{action:'fill'},host.cookie)).status,200);
-  const filled=(await state(host.cookie)).body;
-  assert.equal(filled.room.playerCount,6);
-  assert.equal(filled.room.botCount,5);
-  assert.equal((await post('/api/join',{code,name:'第七人'})).status,409);
-  assert.equal((await post('/api/start',{},host.cookie)).status,200);
-  const hostDeal=(await state(host.cookie)).body;
-  assert.equal(hostDeal.room.status,'ORDERING');
-  assert.equal(hostDeal.room.readyCount,5);
-  assert.equal(hostDeal.self.cards,undefined);assert.equal(hostDeal.room.debugBotHands.length,5);assert.ok(hostDeal.room.debugBotHands.every(p=>p.seat!==1),'human hands stay private');
-  assert.equal((await post('/api/lock',{topCardId:'xxx'},host.cookie)).status,403);
-  const myHand=(await state(phone.cookie)).body.self;
-  assert.equal(myHand.cards.length,2);
-  const allowed=myHand.cards.find(c=>!(myHand.team==='WOLF'&&c.effectiveRole==='WITCH'));
-  assert.equal((await post('/api/lock',{topCardId:allowed.id},phone.cookie)).status,200);
-  assert.equal((await state(host.cookie)).body.room.status,'READY');
-  assert.equal((await post('/api/begin',{},phone.cookie)).status,403);
-  assert.equal((await post('/api/begin',{},host.cookie)).status,200);
-  let seenDay=false, seenNight=false, seenVote=false, seenNightTwo=false;
-  let lastPhaseKey='';
-  for(let i=0;i<700;i++){
-    const view=(await state(phone.cookie)).body;
-    if(view.room.status==='FINISHED'){
-      assert.ok(seenNight&&seenDay,'must traverse night and election');
-      assert.ok(['WOLF','VILLAGE'].includes(view.room.game.winner));
-      const fromHost=(await state(host.cookie)).body;
-      assert.equal(fromHost.room.game.winner,view.room.game.winner);
-      assert.equal(view.room.game.reveal.length,6);
-      assert.deepEqual(fromHost.room.game.reveal,view.room.game.reveal);
-      assert.deepEqual(fromHost.room.game.recap,view.room.game.recap);
-      assert.ok(view.room.game.recap.rounds.length);
-      assert.equal((await post('/api/restart',{},host.cookie)).status,200);
-      assert.equal((await state(phone.cookie)).body.room.status,'LOBBY');
-      assert.equal((await state(phone.cookie)).body.self.cards,undefined);
-      return;
-    }
-    const g=view.room.game;
-    assert.equal(g.reveal,undefined);assert.equal(g.recap,undefined);assert.equal(g.recapEvents,undefined);
-    seenNight ||= g.phase==='NIGHT';seenDay ||= g.phase==='SHERIFF';seenVote ||= g.phase==='VOTE';seenNightTwo ||=g.night>=2;
-    const av=view.self.action;
-    if(av){
-      let type=av.step==='SHERIFF_SIGNUP'?'SIGNUP':av.step==='BADGE'?'TRANSFER':av.step==='WITCH'?'PASS':['SHERIFF','VOTE'].includes(av.step)?'VOTE':'TARGET';
-      let target=av.targets.length?av.targets[0]:null;
-      if(av.step==='WITCH')target=null;
-      const submitted=await post('/api/action',{type,seat:target,run:false,stepKey:g.stepKey},phone.cookie);
-      assert.equal(submitted.status,200,JSON.stringify({g,av,submitted:submitted.body}));
-    }
-    
-    const adv=await post('/api/test-skip',{mode:'PHASE',stepKey:g.stepKey,gameId:g.id,commandId:'simulation-'+i},host.cookie);
-    if(adv.status===409&&/阶段已经改变|倒计时/.test(adv.body.error))continue;
-    assert.equal(adv.status,200,JSON.stringify(adv.body));
+test('production: independent host and six human sessions, private deal, authorized skip, voting and recap',async t=>{
+ await new Promise(done=>server.listen(0,'127.0.0.1',done));base=`http://127.0.0.1:${server.address().port}`;
+ t.after(async()=>{server.closeAllConnections();await new Promise(resolve=>server.close(resolve));rmSync(dir,{recursive:true,force:true});});
+ assert.equal((await post('/api/create',{testMode:true})).status,400);
+ const host=await post('/api/create');assert.equal(host.status,200);const code=host.body.code;
+ assert.equal((await state(host.cookie)).body.self.seat,undefined);
+ assert.equal((await state(host.cookie)).body.room.playerCount,0);
+ for(const route of ['/api/bots','/api/test-mode','/api/test-skip'])assert.equal((await post(route,{action:'fill',enabled:true},host.cookie)).status,404);
+ assert.equal((await post('/api/start',{},host.cookie)).status,409);
+ const phones=[];
+ for(let i=0;i<6;i++){const phone=await post('/api/join',{code,name:'玩家'+(i+1),bot:true});assert.equal(phone.status,200);phones.push(phone);}
+ assert.equal((await post('/api/join',{code,name:'第七人'})).status,409);
+ assert.equal((await post('/api/start',{},phones[0].cookie)).status,403);
+ assert.equal((await post('/api/start',{},host.cookie)).status,200);
+ const dealt=(await state(host.cookie)).body;assert.equal(dealt.room.readyCount,0);assert.equal(dealt.self.cards,undefined);
+ assert.doesNotMatch(JSON.stringify(dealt),/testMode|botCount|debugBot|"bot"|"cards"/);
+ for(const phone of phones){
+  const v=(await state(phone.cookie)).body;assert.equal(v.self.cards.length,2);assert.ok(v.room.players.every(p=>!p.cards));
+  const top=v.self.cards.find(c=>!(v.self.team==='WOLF'&&c.effectiveRole==='WITCH'));
+  assert.equal((await post('/api/lock',{topCardId:top.id},phone.cookie)).status,200);
+ }
+ assert.equal((await state(host.cookie)).body.room.status,'READY');
+ assert.equal((await post('/api/begin',{},host.cookie)).status,200);
+ let serial=0;
+ const skip=async(mode)=>{
+  const v=(await state(host.cookie)).body,g=v.room.game;
+  const cmd={mode,gameId:g.id,stepKey:g.stepKey,commandId:'human-game-'+(++serial)};
+  assert.equal((await post('/api/skip',cmd,phones[0].cookie)).status,403);
+  const result=await post('/api/skip',cmd,host.cookie);assert.equal(result.status,200,JSON.stringify(result.body));return cmd;
+ };
+ // No phone can act during the unopened introduction; skip does not fabricate a target.
+ assert.equal((await post('/api/action',{type:'TARGET',seat:1},phones[0].cookie)).status,409);
+ const cmd=await skip('PHASE');assert.equal((await post('/api/skip',cmd,host.cookie)).body.changed,false);
+ assert.equal((await post('/api/skip',{...cmd,commandId:'stale-human-command'},host.cookie)).status,409);
+ let sawVote=false;
+ for(let i=0;i<100;i++){
+  const v=(await state(host.cookie)).body,g=v.room.game;
+  if(v.room.status==='FINISHED'){
+   assert.ok(sawVote);assert.equal(g.reveal.length,6);
+   for(const phone of phones){const pg=(await state(phone.cookie)).body.room.game;assert.deepEqual(pg.recap,g.recap);assert.deepEqual(pg.reveal,g.reveal);}
+   assert.equal((await post('/api/skip',{...cmd,commandId:'after-finish-command'},host.cookie)).status,409);
+   assert.equal((await post('/api/restart',{},host.cookie)).status,200);
+   const reset=(await state(host.cookie)).body;assert.equal(reset.room.status,'LOBBY');assert.equal(reset.room.playerCount,6);
+   assert.equal((await state(phones[0].cookie)).body.self.cards,undefined);return;
   }
-  assert.fail('test game did not finish in 700 manual phase advances');
+  assert.equal(g.reveal,undefined);assert.equal(g.recap,undefined);assert.equal(g.recapEvents,undefined);
+  if(g.phase==='VOTE'){
+   sawVote=true;const target=v.room.players.find(p=>!p.eliminated).seat;
+   for(const phone of phones){const pv=(await state(phone.cookie)).body;if(pv.self.action?.step==='VOTE')assert.equal((await post('/api/action',{type:'VOTE',seat:target,stepKey:g.stepKey},phone.cookie)).status,200);}
+  }
+  await skip(g.phase==='NIGHT'?'DAWN':'PHASE');
+ }
+ assert.fail('six-player game did not finish');
 });
 
 test('random deals meet 2023 constraints',()=>{
